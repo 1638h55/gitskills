@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>decription about details</title>
+	<link rel="stylesheet" href="css/common.css" type="text/css"/>
+	<link rel="stylesheet" href="css/channeldetail.css" type="text/css"/>
+	<style>
+		
+	</style>
+	<script>
+		function getCookie(){
+			var _url=window.location.search.replace("?","");
+			var _arr=_url.split("&");
+			getMessage(_arr);
+			return _arr;	
+		}
+		function getMessage(_arr){
+			var _cookie=document.cookie;
+			var _img1=document.getElementsByTagName("img")[0];
+			_img1.src="images/"+_arr[0].split("=")[1]+".jpg";
+			var _img2=document.getElementsByTagName("img")[1];
+			_img2.src="images/"+_arr[0].split("=")[1]+".jpg";
+			var _strong=document.getElementsByTagName("strong")[0];
+			_strong.innerHTML="¥"+_arr[1].split("=")[1];
+			var _class=document.getElementsByClassName("branddetail")[0].children[1].children[0];
+			_class.innerHTML=_arr[2].split("=")[1];
+			var _where=document.getElementsByClassName("branddetail")[0].children[2].children[0];
+			_where.innerHTML=_arr[3].split("=")[1];
+		}
+		function addCount(){
+			var _first=document.getElementsByClassName("count").children[0].[0];
+			var _second=document.getElementsByClassName("count").children[0].[2];
+		}
+		window.onload=function(){
+			var cookieUtil={
+				get:function(name){
+					var cookieName=encodeURICompoent(name)+"=";
+					var cookieStart=document.cookie.indexOf(cookieName);
+					var cookieValue=null;
+					if(cookieStart>-1){
+						var cookieEnd=document.cookie.indexOf(";",cookieStart);
+						if(cookieEnd==-1){
+							cookieEnd=document.cookie.length;
+						}
+						cookieValue=decodeURIComponent(document.cookie.substring(cookieStart+cookieName.length,cookieEnd));
+						
+					}
+					return cookieValue;
+				},
+				set:function(name,value,expires,path,domain,secure){
+					var cookieText=encodeURIComponent(name)+"="+encodeURIComponent(value);
+					if(expires instanceof Date){
+						cookieText+=";expires="+expires.toGMTString();
+					}
+					if(path){
+						cookieText+=";path="+path;
+					}if(domain){
+						cookieText+=";domain="+domain;
+					}if(secure){
+						cookieText+=";secure";
+					}
+					document.cookie=cookieText;
+				},
+				unset:function(name,path,domain,secure){
+					this.set(name,"",new Date(0),path,domain,secure);
+				}
+			};
+			
+			var _arr=getCookie();
+			console.log(_arr.length);
+			for(var i=0;i<_arr.length;i++){
+				cookieUtil.set(_arr[i].split("=")[0],_arr[i].split("=")[1]);	
+			}
+		
+		}
+	</script>
+</head>
+<body>
+	<div class="container">
+		<div class="left">
+			<img alt="" src=""/>
+	
+		</div>
+		<div class="right">
+			<div class="brandname">
+				<h2>CHANEL(香奈儿)#银色镶钻小双C耳饰</h2>
+			</div>
+			<div class="branddetail">
+				<p>寺库价<strong></strong></p>
+				<p>商品级别<span></span></p>
+				<p class="born">发货地<span></span>&nbsp;有货<span>&nbsp;17点钟前完成下单,预计72小时送达</span></p>
+				<p>温馨提示<span>到店自提有精美礼品</span></p>
+			</div>
+			<div class="brandlist">
+				<p class="count">购买数量<span class="count"><span>-</span><span>1</span><span>+</span></span>仅剩<b></b>件,抓紧时间购买哦!</p>
+				<p><span>立即购买</span><span>加入购物车</span></p>
+				
+			</div>
+			<div class="wish"></div>
+		</div>
+		<div class="outpicture">
+			<div>
+				<img alt="" src=""/>
+			</div>
+			
+		</div>
+	
+	</div>
+	
+
+</body>
+</html>
