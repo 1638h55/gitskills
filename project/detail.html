@@ -16,7 +16,6 @@
 			return _arr;	
 		}
 		function getMessage(_arr){
-			var _cookie=document.cookie;
 			var _img1=document.getElementsByTagName("img")[0];
 			_img1.src="images/"+_arr[0].split("=")[1]+".jpg";
 			var _img2=document.getElementsByTagName("img")[1];
@@ -27,15 +26,54 @@
 			_class.innerHTML=_arr[2].split("=")[1];
 			var _where=document.getElementsByClassName("branddetail")[0].children[2].children[0];
 			_where.innerHTML=_arr[3].split("=")[1];
+			var _b=document.getElementById("count").getElementsByTagName("b")[0];
+			//_b.style.color="red";
+			_b.innerHTML=parseInt(_arr[4].split("=")[1])-1;
+			
+			
 		}
-		function addCount(){
-			var _first=document.getElementsByClassName("count").children[0].[0];
-			var _second=document.getElementsByClassName("count").children[0].[2];
+		function addCount(EventUtil){
+			var _span=document.getElementById("count").children[0];
+			var _b=document.getElementById("count").children[1];
+			var _cart=document.getElementById("cart");
+			EventUtil.addEvent(_span.children[0],"click",function(e){
+				e=e||window.event;
+				
+				if(parseInt(_span.children[1].innerHTML)==0){
+					_span.children[1].innerHTML=0;
+				}else{
+					_span.children[1].innerHTML=parseInt(_span.children[1].innerHTML)-1;
+					_b.innerHTML=parseInt(_b.innerHTML)+1;
+				}
+			});
+			EventUtil.addEvent(_span.children[2],"click",function(e){
+				e=e||window.event;
+				if(parseInt(_b.innerHTML)==0){
+					//EventUtil.removeEvent(this,"click",arguments.callee);
+					_span.children[1].innerHTML=_span.children[1].innerHTML;
+				}else{
+					_span.children[1].innerHTML=parseInt(_span.children[1].innerHTML)+1;
+					_b.innerHTML=parseInt(_b.innerHTML)-1;
+				}
+				
+				
+			})
+			EventUtil.addEvent(_cart.children[1],"click",function(e){
+				e=e||window.event;
+				if(parseInt(_span.children[1].innerHTML)>0){
+					var _category=document.getElementsByTagName("h2")[0].innerHTML;
+					var _count=parseInt(_span.children[1].innerHTML);
+					window.location.href="cart.html?name="+_category+"&count="+_count;
+				}else{
+					alert("您还没有选择商品");
+				}
+				
+			})
 		}
 		window.onload=function(){
 			var cookieUtil={
 				get:function(name){
-					var cookieName=encodeURICompoent(name)+"=";
+					var cookieName=encodeURIComponent(name)+"=";
 					var cookieStart=document.cookie.indexOf(cookieName);
 					var cookieValue=null;
 					if(cookieStart>-1){
@@ -50,6 +88,8 @@
 				},
 				set:function(name,value,expires,path,domain,secure){
 					var cookieText=encodeURIComponent(name)+"="+encodeURIComponent(value);
+					//console.log(cookieText)
+					//var cookieText=name +"=" +value;
 					if(expires instanceof Date){
 						cookieText+=";expires="+expires.toGMTString();
 					}
@@ -61,18 +101,45 @@
 						cookieText+=";secure";
 					}
 					document.cookie=cookieText;
+					//console.log(document.cookie);
 				},
 				unset:function(name,path,domain,secure){
 					this.set(name,"",new Date(0),path,domain,secure);
 				}
 			};
-			
-			var _arr=getCookie();
-			console.log(_arr.length);
-			for(var i=0;i<_arr.length;i++){
-				cookieUtil.set(_arr[i].split("=")[0],_arr[i].split("=")[1]);	
+			var EventUtil={
+			addEvent:function(element,type,hander){
+				if(element.addEventListener){
+					element.addEventListener(type,hander,false)
+				}else if(element.attachEvent){
+					element.attachEvent("on"+type,hander);
+				}else{
+					element["on"+type]=hander;
+				}
+			},
+			removeEvent:function(element,type,hander){
+				if(element.removeEventListener){
+					element.removeEventListener(type,hander,false);
+				}else if(element.detachEvent){
+					element.detachEvent("on"+type,hander);
+				}else{
+					element["on"+type]=null;
+
+				}
 			}
-		
+		};
+			var _arr=getCookie();
+			for(var i=0;i<_arr.length;i++){
+				cookieUtil.set(_arr[i].split("=")[0],_arr[i].split("=")[1]);
+				
+			}
+			addCount(EventUtil);	
+			
+		}
+		document.onselectstart=function(e){
+			e=e||window.event;
+			e.stopProgation?e.stopProgation():e.cancelBubble=true;
+			e.preventDefault?e.preventDefault():e.returnValue=false;
 		}
 	</script>
 </head>
@@ -84,7 +151,7 @@
 		</div>
 		<div class="right">
 			<div class="brandname">
-				<h2>CHANEL(香奈儿)#银色镶钻小双C耳饰</h2>
+				<h2>CHANEL(香奈儿)银色镶钻小双C耳饰</h2>
 			</div>
 			<div class="branddetail">
 				<p>寺库价<strong></strong></p>
@@ -93,8 +160,8 @@
 				<p>温馨提示<span>到店自提有精美礼品</span></p>
 			</div>
 			<div class="brandlist">
-				<p class="count">购买数量<span class="count"><span>-</span><span>1</span><span>+</span></span>仅剩<b></b>件,抓紧时间购买哦!</p>
-				<p><span>立即购买</span><span>加入购物车</span></p>
+				<p class="count" id="count">购买数量<span class="count"><span>-</span><span>1</span><span>+</span></span>仅剩<b></b>件,抓紧时间购买哦!</p>
+				<p id="cart"><span>立即购买</span><span>加入购物车</span></p>
 				
 			</div>
 			<div class="wish"></div>
@@ -107,6 +174,7 @@
 		</div>
 	
 	</div>
+	<div id="reminde"></div>
 	
 
 </body>

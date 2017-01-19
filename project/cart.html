@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>购物车</title>
+		
+		<link type="text/css" rel="stylesheet" href="css/common.css"/>
+		<style>
+			table{width:968px;height:auto;margin:0 auto;border-spacing:0px;cellpadding:20px;}
+			thead tr{width:100%;height:42px;background-color:#ececec;}
+			table th {text-align:left;line-height:42px;}
+			table th :first-child{width:70px;}
+			table th :nth-child(2){width:360px;}
+			table th :nth-child(3){width:102px;}
+			table th :nth-child(4){width:100px;}
+			table th :nth-child(5){width:126px;}
+			table th :nth-child(6){width:126px;}
+			table th :nth-child(7){width:90px;}
+			#choose {width:10px;height:10px;}
+			tbody tr{background-color:#fdf0ef;}
+			tbody tr td:nth-child(5) span:nth-child(odd){background-color:white;display:inline-block;width:12px;line-height:18px;text-align:center;border:0.5px solid #ececec;}
+			tbody tr td:nth-child(5) span:nth-child(even){background-color:white;display:inline-block;width:36px;line-height:18px;text-align:center;border:0.5px solid #ececec;}
+		</style>
+		<script>
+			window.onload=function(){
+			var cookieUtil={
+				get:function(name){
+					var cookieName=encodeURIComponent(name)+"=";
+					var cookieStart=document.cookie.indexOf(cookieName);
+					var cookieValue=null;
+					if(cookieStart>-1){
+						var cookieEnd=document.cookie.indexOf(";",cookieStart);
+						if(cookieEnd==-1){
+							cookieEnd=document.cookie.length;
+						}
+						cookieValue=decodeURIComponent(document.cookie.substring(cookieStart+cookieName.length,cookieEnd));
+						
+					}
+					return cookieValue;
+				},
+				set:function(name,value,expires,path,domain,secure){
+					var cookieText=encodeURIComponent(name)+"="+encodeURIComponent(value);
+					//console.log(cookieText)
+					//var cookieText=name +"=" +value;
+					if(expires instanceof Date){
+						cookieText+=";expires="+expires.toGMTString();
+					}
+					if(path){
+						cookieText+=";path="+path;
+					}if(domain){
+						cookieText+=";domain="+domain;
+					}if(secure){
+						cookieText+=";secure";
+					}
+					document.cookie=cookieText;
+					//console.log(document.cookie);
+				},
+				unset:function(name,path,domain,secure){
+					this.set(name,"",new Date(0),path,domain,secure);
+				}
+			};
+			var EventUtil={
+			addEvent:function(element,type,hander){
+				if(element.addEventListener){
+					element.addEventListener(type,hander,false)
+				}else if(element.attachEvent){
+					element.attachEvent("on"+type,hander);
+				}else{
+					element["on"+type]=hander;
+				}
+			},
+			removeEvent:function(element,type,hander){
+				if(element.removeEventListener){
+					element.removeEventListener(type,hander,false);
+				}else if(element.detachEvent){
+					element.detachEvent("on"+type,hander);
+				}else{
+					element["on"+type]=null;
+
+				}
+			}
+		};
+				var _arr=decodeURIComponent(window.location.search.replace("?","")).split("&");
+				var _name=_arr[0].split("=")[1];
+				var _count=parseInt(_arr[1].split("=")[1]);
+				var _tr=document.createElement("tr");
+				
+				
+				var _total=parseInt(cookieUtil.get("count"));
+				var _source=cookieUtil.get("source");
+				document.getElementsByTagName("tbody")[0].appendChild(_tr);
+				var _td=null;
+				var _span=null;
+				for(var i=0;i<7;i++){
+					_td=document.createElement("td");
+					_tr.appendChild(_td);
+				}
+				
+				var _tds=document.getElementsByTagName("td");
+				_tds[1].style.height="82px";
+				_tds[0].innerHTML=("<input type=\"checkbox\" checked/ style=\"width=\"10px\" height=\"10px\"\">"+"全选");
+				console.log(_tds[0].parentNode);
+				function changeColor(){
+						if(_tds[0].children[0].checked){
+						_tds[0].parentNode.style.backgroundColor="#fdf0ef";
+						}else{
+						_tds[0].parentNode.style.backgroundColor="white";
+						}
+				}
+				_tds[0].children[0].onclick=changeColor;
+				
+				_tds[1].innerHTML=("<img alt=\"\" src=\"images/"+_source+".jpg"+"\"/>"+"<span>"+_name+"</span>");
+				_tds[1].children[0].style.float="left";
+				_tds[1].children[0].style.width="82px";
+				_tds[1].children[0].style.margin="20px 15px 20px 0px";
+				_tds[1].children[0].style.height="82px";
+				_tds[1].children[1].style.lineHeight="56px";
+				_tds[1].style.textAlign="left";
+				_tds[2].innerHTML=cookieUtil.get("where");
+				_tds[3].innerHTML=cookieUtil.get("price");
+				_tds[4].innerHTML="<span>-</span>"+"<span>"+_count+"</span>"+"<span>+</span>";
+				
+				_tds[5].innerHTML=parseInt(cookieUtil.get("price"))*_count;
+				_tds[6].innerHTML="删除";
+				_tds[6].style.position="relative";
+				EventUtil.addEvent(_tds[6],"click",function(){
+					_span=document.createElement("span");
+					_span.style.display="inline-block";
+					_span.style.width="150px";
+					_span.style.height="86px";
+					_span.style.border="1px solid grey";
+					_span.style.textAlign="center";
+					_span.style.lineHeight=24+"px";
+					_span.style.color="white";
+					_span.style.zIndex=1;
+					_span.style.position="absolute";
+					_span.style.top="70px";
+					_span.style.left=-50+"px";
+					_span.innerHTML=("<span>您确定要删除吗?</span>"+"<span>确定</span>"+"<span>取消</span>");
+					_span.children[0].style.display="block";
+					_span.children[0].style.width="100%";
+					_span.children[0].style.color="black";
+					_span.children[0].style.lineHeight=42+"px";
+					_span.children[1].style.display="block";
+					_span.children[1].style.float="left";
+					_span.children[1].style.width="44px";
+					_span.children[1].style.marginLeft="26px";
+					_span.children[1].style.marginRight="8px";
+					_span.children[1].style.backgroundColor="#e93b39";
+					EventUtil.addEvent(_span.children[1],"click",function(){
+						document.getElementsByTagName("tbody")[0].removeChild(this.parentNode.parentNode.parentNode);
+					});
+					EventUtil.addEvent(_span.children[2],"click",function(e){
+						//alert("hello");
+						e=e||window.event;
+						e.stopProgation?e.stopProgation():e.cancelBubble=true;
+						e.preventDefault?e.preventDefault():e.returnValue=false;
+						console.log(this.parentNode);
+						_span.style.display="none";
+					})
+					_span.children[2].style.display="block";
+					_span.children[2].style.float="left";
+					_span.children[2].style.width="44px";
+					_span.children[2].style.backgroundColor="#999999";
+					this.appendChild(_span);
+				
+				});
+				EventUtil.addEvent(_tds[4].children[0],"click",function(){
+					if(parseInt(_tds[4].children[1].innerHTML)>1){
+						_tds[4].children[1].innerHTML=parseInt(_tds[4].children[1].innerHTML)-1;
+						_tds[5].innerHTML=parseInt(cookieUtil.get("price"))*(parseInt(_tds[4].children[1].innerHTML)-1);
+					}else{
+						_tds[4].children[1].innerHTML=1;
+						_tds[5].innerHTML=parseInt(cookieUtil.get("price"));
+					}
+				});
+				EventUtil.addEvent(_tds[4].children[2],"click",function(){
+					if(parseInt(_tds[4].children[1].innerHTML)<_total){
+						_tds[4].children[1].innerHTML=parseInt(_tds[4].children[1].innerHTML)+1;
+						_tds[5].innerHTML=parseInt(cookieUtil.get("price"))*(parseInt(_tds[4].children[1].innerHTML)-1);
+
+					}else{
+						_tds[4].children[1].innerHTML=_total;
+						_tds[5].innerHTML=parseInt(cookieUtil.get("price"))*_total;
+					}
+					
+				});
+				
+			}
+		</script>
+	</head>
+	<body>
+		<table  cellpadding="20px">
+			<thead>
+				<tr>
+				<th><input type="checkbox" checked id="choose">全选</th>
+				<th>商品名称</th>
+				<th>发货站</th>
+				<th>价格</th>
+				<th>数量</th>
+				<th>金额小计</th>
+				<th>操作</th>
+			</tr>
+			</thead>
+			<tbody>
+				
+			
+			</tbody>
+			
+		</table>
+	
+	</body>
+</html>

@@ -18,8 +18,9 @@
 .branddetail p:nth-child(2) span{color:blue;}
 p.born span:first-child{padding-left:58px;color:blue;}
 .brandlist{width:597px;height:135px;padding:35px 0 0 24px;}
-.brandlist p:first-child{height:24px;line-height:24px;margin-bottom:20px;};
-span.count{display:inline-block;margin-left:15px;width:70px;height:20px;}
+.brandlist p:first-child{height:24px;line-height:24px;margin-bottom:20px;}
+#count b{display:inline-block;color:red;width:20px;line-height:24px;text-align:center;}
+span.count{display:inline-block;margin-left:15px;width:100px;height:20px;}
 span.count span{display:inline-block;text-align:center;}
 span.count span:nth-child(odd){width:20px;height:20px;background:#f5f3f3;}
 span.count span:nth-child(odd):hover{background-color:blue;}
@@ -33,3 +34,6 @@ span.count span:nth-child(even){width:30px;line-height:18px;border:1px solid #f5
 .brandlist p:nth-child(2) span:nth-child(2){border:2px solid red;display:inline-block;width:156px;height:41px;line-height:41px;color:red;text-align:center;opacity:1;}
 .brandlist p:nth-child(2) span:nth-child(2):hover{opacity:0.3;}	
 .wish{width:597px;height:28px;}
+#reminde{width:382px;height:174px;background:white;}
+
+
