@@ -8,13 +8,13 @@
 	<style>
 		
 	</style>
-	<script>
+	<script>/*从地址栏获取产品的详细信息，并且切割成数组*/
 		function getCookie(){
 			var _url=window.location.search.replace("?","");
 			var _arr=_url.split("&");
 			getMessage(_arr);
 			return _arr;	
-		}
+		}/*将获取的信息写入对应的产品之中*/
 		function getMessage(_arr){
 			var _img1=document.getElementsByTagName("img")[0];
 			_img1.src="images/"+_arr[0].split("=")[1]+".jpg";
@@ -31,11 +31,13 @@
 			_b.innerHTML=parseInt(_arr[4].split("=")[1])-1;
 			
 			
-		}
+		}/*进行单件产品购买数量的计算，并且将购买的情况上传到购物车*/
 		function addCount(EventUtil){
 			var _span=document.getElementById("count").children[0];
 			var _b=document.getElementById("count").children[1];
 			var _cart=document.getElementById("cart");
+			var _reminde=document.getElementById("reminde");
+			var _shadow=document.getElementById("shadow");
 			EventUtil.addEvent(_span.children[0],"click",function(e){
 				e=e||window.event;
 				
@@ -49,7 +51,6 @@
 			EventUtil.addEvent(_span.children[2],"click",function(e){
 				e=e||window.event;
 				if(parseInt(_b.innerHTML)==0){
-					//EventUtil.removeEvent(this,"click",arguments.callee);
 					_span.children[1].innerHTML=_span.children[1].innerHTML;
 				}else{
 					_span.children[1].innerHTML=parseInt(_span.children[1].innerHTML)+1;
@@ -57,20 +58,49 @@
 				}
 				
 				
-			})
+			});
 			EventUtil.addEvent(_cart.children[1],"click",function(e){
+				_reminde.style.display="block";
+				_reminde.style.zIndex=99;
+				_shadow.style.display="block";
+			});
+			EventUtil.addEvent(_cart.children[0],"click",function(e){
 				e=e||window.event;
 				if(parseInt(_span.children[1].innerHTML)>0){
-					var _category=document.getElementsByTagName("h2")[0].innerHTML;
-					var _count=parseInt(_span.children[1].innerHTML);
-					window.location.href="cart.html?name="+_category+"&count="+_count;
+					var _category=document.getElementsByTagName("h2")[0].innerHTML;/*获取产品的名称*/
+					var _count=parseInt(_span.children[1].innerHTML);/*获取该产品的购买数量*/
+					window.location.href="cart.html?name="+_category+"&count="+_count;/*跳转的购物车*/
+				}else{
+					alert("您还没有选择商品");
+				}
+			});
+			EventUtil.addEvent(_reminde.children[2].children[0],"click",function(e){
+				e=e||window.event;
+				if(parseInt(_span.children[1].innerHTML)>0){
+					var _category=document.getElementsByTagName("h2")[0].innerHTML;/*获取产品的名称*/
+					var _count=parseInt(_span.children[1].innerHTML);/*获取该产品的购买数量*/
+					window.location.href="cart.html?name="+_category+"&count="+_count;/*跳转的购物车*/
 				}else{
 					alert("您还没有选择商品");
 				}
 				
+			});
+			EventUtil.addEvent(_reminde.children[2].children[1],"click",function(e){
+				_reminde.style.display="none";
+				_shadow.style.display="none";
+				
+			});
+			EventUtil.addEvent(_reminde.children[0].children[0],"click",function(e){
+				_reminde.style.display="none";
+				_shadow.style.display="none";
+			});
+			EventUtil.addEvent(_shadow,"click",function(e){
+				this.style.display="none";
+				_reminde.style.display="none";
 			})
 		}
 		window.onload=function(){
+			/*设置cookie*/
 			var cookieUtil={
 				get:function(name){
 					var cookieName=encodeURIComponent(name)+"=";
@@ -106,7 +136,7 @@
 				unset:function(name,path,domain,secure){
 					this.set(name,"",new Date(0),path,domain,secure);
 				}
-			};
+			};/*为元素添加事件*/
 			var EventUtil={
 			addEvent:function(element,type,hander){
 				if(element.addEventListener){
@@ -130,12 +160,12 @@
 		};
 			var _arr=getCookie();
 			for(var i=0;i<_arr.length;i++){
-				cookieUtil.set(_arr[i].split("=")[0],_arr[i].split("=")[1]);
+				cookieUtil.set(_arr[i].split("=")[0],_arr[i].split("=")[1]);/*添加cookie*/
 				
 			}
 			addCount(EventUtil);	
 			
-		}
+		}/*组织鼠标拖拽的蓝色选框*/
 		document.onselectstart=function(e){
 			e=e||window.event;
 			e.stopProgation?e.stopProgation():e.cancelBubble=true;
@@ -161,7 +191,7 @@
 			</div>
 			<div class="brandlist">
 				<p class="count" id="count">购买数量<span class="count"><span>-</span><span>1</span><span>+</span></span>仅剩<b></b>件,抓紧时间购买哦!</p>
-				<p id="cart"><span>立即购买</span><span>加入购物车</span></p>
+				<p id="cart"><span>立即抢购</span><span>加入购物车</span></p>
 				
 			</div>
 			<div class="wish"></div>
@@ -174,7 +204,16 @@
 		</div>
 	
 	</div>
-	<div id="reminde"></div>
+	<div id="reminde">
+		<div>&nbsp;&nbsp;加入购物车成功<span>X</span></div>
+		<div>添加成功</div>
+		<div>
+			<span>去购物车结算</span>
+			<span>继续购物</span>
+		</div>
+	
+	</div>
+	<div id="shadow"></div>
 	
 
 </body>
