@@ -6,9 +6,14 @@
 		
 		<link type="text/css" rel="stylesheet" href="css/common.css"/>
 		<style>
-			table{width:968px;height:auto;margin:0 auto;border-spacing:0px;border:0.5px solid white;}
+			.createheader{width:100%;height:70px;background-color:#323232;overflow:hidden;}
+			.headcontent{width:968px;height:70px;margin:0 auto;}
+			.iconlogo{float:left;}
+			.carprocess{float:right;}
+			table{width:968px;height:auto;margin:0 auto;border-spacing:0px;border:1px solid white;}
+			table tr{margin-top:1px;}
 			thead tr{width:100%;height:42px;background-color:#ececec;}
-			table th {text-align:left;line-height:42px;}
+			table th {text-align:center;line-height:42px;}
 			table th :first-child{width:70px;}
 			table th :nth-child(2){width:360px;}
 			table th :nth-child(3){width:102px;}
@@ -18,15 +23,24 @@
 			table th :nth-child(7){width:90px;}
 			#choose {width:10px;height:10px;}
 			tbody{border:1px solid white;}
-			tbody tr{background-color:#fdf0ef;width:100%;}
+			tbody tr{background-color:#fdf0ef;width:100%;text-align:center;height:122px;}
+			tbody tr td{height:82px;}
+			tbody tr td:nth-child(2) span.names{line-height:56px;text-align:left;float:left;}
+			tbody tr td:nth-child(2) img{float:left;width:82px;height:82px;margin:20px 15px 20px 0px;}
+			tbody tr td:nth-child(5) span:nth-child(even){background-color:white;display:inline-block;width:36px;line-height:18px;text-align:center;border:0.5px solid #ececec;}	
+			tbody tr td:first-child{width:120px;text-align:center;}
 			tbody tr td:nth-child(5) span:nth-child(odd){background-color:white;display:inline-block;width:12px;line-height:18px;text-align:center;border:0.5px solid #ececec;}
-			tbody tr td:nth-child(5) span:nth-child(even){background-color:white;display:inline-block;width:36px;line-height:18px;text-align:center;border:0.5px solid #ececec;}
+		
+			tbody tr td:nth-child(7){position:relative;}
 			#cal{width:893px;height:167px;padding:15px 45px 25px 30px;margin:0 auto;margin-top:5px;border:1px solid #f1f1f1;
 				background-color:#fff;
 			}
 			#cal p{text-align:right;}
 			#cal p:first-child{width:910px;height:23px;}
-			#cal p:first-child span:first-child{margin-right:700px;}
+			#cal p:first-child label{margin-right:30px;}
+			.span1{margin-right:8px;}
+			
+			#cal p:first-child span:nth-child(2){margin-right:650px;}
 			#cal p:nth-child(2){width:910px;height:23px;}
 			#cal p:nth-child(3){width:910px;height:23px;}
 			#cal p:nth-child(4){width:910px;height:44px;}
@@ -34,52 +48,121 @@
 			#cal p:nth-child(5){width:910px;height:48px;padding:2px 0px;}
 			#cal p:nth-child(5) span:first-child{border:1px solid #d32220;color:#d32220;opacity:0.7;float:left;width:78px;height:36px;line-height:36px;text-align:center;}
 			#cal p:nth-child(5) span:nth-child(2){width:136px;height:38px;font-weight:blod;background-color:#d32220;opacity:0.7;color:#fff;line-height:38px;text-align:center;float:right;}
+			#container{width:634px;height:460px;border:1px solid white;position:absolute;margin:auto;left:0;top:0;bottom:0;right:0;display:none;
+			}
 			
+			.confirm{width:530px;height:400px;padding:20px 42px;border:10px solid rgba(0,0,0,0.4);background-color:white;poisition:relative;}
+			.confirm .x{width:30px;height:30px;position:absolute;background:url(images/iconBgs.png) no-repeat 0 -517px; top:-10px;right:-10px;
+				transition:all 1s;
+			}
+			.confirm .x:hover{transform:rotate(360deg);}
+			.confirm div{width:260px;height:376px;float:left;}
+			.confirm div:first-child{padding-right:8px;borde-right:1px solid grey;}
+			.confirm div p{margin-top:10px;color:#5d5d5d;}
+			.confirm div h3{margin-bottom:15px;} 
+			 .confirm input{height:32px;}
+			.confirm div p span{margin-left:3px;}
+			.input.data+span{display:inline-block;width:68px;height:28px;border:1px solid #000;}
+			.password{width:94px;height:24px;line-height:24px;text-align:center;background-color:#fff;}
+			.register{width:56px;height:24px;line-height:24px;text-align:center;background-color:#ed8f07;}
+			input.data{width:70px;}
+			.pra{margin-bottom:20px;}
+			#cover{width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;position:absolute;left:0;top:0;display:none;}
 		</style>
+		<script type="text/javascript" src="js/jquery.js"></script>
 		<script>
 			window.onload=function(){
 			/*设置cookie的对象*/
-			var cookieUtil={
-				get:function(name){
-					var cookieName=encodeURIComponent(name)+"=";
-					var cookieStart=document.cookie.indexOf(cookieName);
-					var cookieValue=null;
-					if(cookieStart>-1){
-						var cookieEnd=document.cookie.indexOf(";",cookieStart);
-						if(cookieEnd==-1){
-							cookieEnd=document.cookie.length;
+			var subCookieUtil={
+		get:function(name,subname){
+			var subcookies=this.getAll(name);
+			if(subcookies){
+				return subcookies[subname];
+			}else{
+				return null;
+			}
+		},
+		
+		getAll:function(name){
+			var cookiename=encodeURIComponent(name)+"=",
+				cookiestart=document.cookie.indexOf(cookiename),
+				cookievalue=null,
+				cookieend,
+				subcookies,
+				i,
+				parts,
+				result={};
+				if(cookiestart>-1){
+					cookieend=document.cookie.indexOf(";",cookiestart);
+					if(cookieend==-1){
+						cookieend=document.cookie.length;
+					}
+					cookievalue=document.cookie.substring(cookiestart+cookiename.length,cookieend);
+					if(cookievalue.length>0){
+						subcookies=cookievalue.split("&");
+						for(let i=0;i<subcookies.length;i++){
+							parts=subcookies[i].split("=");
+							result[decodeURIComponent(parts[0])]=decodeURIComponent(parts[1]);
 						}
-						cookieValue=decodeURIComponent(document.cookie.substring(cookieStart+cookieName.length,cookieEnd));
-						
 					}
-					return cookieValue;
-				},
-				set:function(name,value,expires,path,domain,secure){
-					var cookieText=encodeURIComponent(name)+"="+encodeURIComponent(value);
-					//console.log(cookieText)
-					//var cookieText=name +"=" +value;
-					if(expires instanceof Date){
-						cookieText+=";expires="+expires.toGMTString();
-					}
-					if(path){
-						cookieText+=";path="+path;
-					}if(domain){
-						cookieText+=";domain="+domain;
-					}if(secure){
-						cookieText+=";secure";
-					}
-					document.cookie=cookieText;
-					//console.log(document.cookie);
-				},
-				unset:function(name,path,domain,secure){
-					this.set(name,"",new Date(0),path,domain,secure);
+					return result;
+				}else{
+					return null;
+				}		
+			
+		},
+		
+		set:function(name,subname,value,expires,path,domain,secure){
+			var subcookies=this.getAll(name) || {};
+			subcookies[value]=value;
+			this.setAll(name,subcookies,expires,path,domain,secure);
+		},
+		setAll:function(name,subcookies,expires,path,domain,secure){
+			var cookietext=encodeURIComponent(name)+"=",
+			subcookiesparts=new Array(),
+			subname;
+			for(subname in subcookies){
+				if(subname.length>0 && subcookies.hasOwnProperty(subname)){
+					subcookiesparts.push(encodeURIComponent(subname)+"="+
+					encodeURIComponent(subcookies[subname]));
 				}
-			};
+			}
+			if(subcookiesparts.length>0){
+				cookietext+=subcookiesparts.join("&");
+				if(expires instanceof Date){
+					cookietext+=";expires="+expires.toGMTString();
+				}
+				if(path){
+					cookietext+=";path="+path;
+				}
+				if(domain){
+					cookietext+=";domain"+domain;
+				}
+				if(secure){
+					cookietext+=";secure"+secure;
+				}
+			}else{
+				cookietext+=";expires="+(new Date(0)).toGMTString();
+			}
+			document.cookie=cookietext;
+		},
+		unset:function(name,subname,path,domain,secure){
+			var subcookies=this.getAll(name);
+				if(subcookies){
+					delete subcookies[subname];
+					this.setAll(name,subcookies,null,path,domain,secure);
+				}
+		},
+		unsetAll:function(name,path,domain,secure){
+			this.setAll(name,null,new Date(0),path,domain,secure);
+		}
+		
+	};
 			/*添加事件的对象*/
 			var EventUtil={
 			addEvent:function(element,type,hander){
 				if(element.addEventListener){
-					element.addEventListener(type,hander,false)
+					element.addEventListener(type,hander,false);
 				}else if(element.attachEvent){
 					element.attachEvent("on"+type,hander);
 				}else{
@@ -97,56 +180,117 @@
 				}
 			}
 		};
-		addMessage(EventUtil,cookieUtil);
-		calCash(EventUtil);
+		
+		var _cancel=document.getElementById("cal").children[0].children[0];
+		addMessage(EventUtil,subCookieUtil);
+		checkOrder(EventUtil);
+		calCash();
+		totalNumber();
+		var count=totalNumber();
+		var money=calCash();
+		_cancel.onclick=cancelAll;
 }
-		function addMessage(EventUtil,cookieUtil){
-		var _arr=decodeURIComponent(window.location.search.replace("?","")).split("&");/*从地址栏中获取产品购买信息*/
-			var _name=_arr[0].split("=")[1];/*产品名称*/
-			var _count=parseInt(_arr[1].split("=")[1]);/*产品购买数量*/
-			var _tr=document.createElement("tr");
-			
-			
-			var _total=parseInt(cookieUtil.get("count"));/*获取产品的总共数量*/
-			var _source=cookieUtil.get("source");/*获取产品的地址信息*/
-			var _level=cookieUtil.get("used");/*获取产品的等级*/
-			document.getElementsByTagName("tbody")[0].appendChild(_tr);
+//添加商品信息
+function addMessage(EventUtil,subCookieUtil){
+		var _arr=decodeURIComponent(window.location.search.replace("?","")).split("&");/*从地址栏中获取产品购买信息以及产品详情*/	
+		var _count=parseInt(_arr[0].split("=")[1]);/*产品购买数量*/	
+		var _cookiename=_arr[1].split("=")[1];
+			var _arr1=[];
+			var _str=document.cookie;
+			var _arr2=_str.split(/;/g);
+			var _tobody=document.getElementsByTagName("tbody")[0];
+			var _tr=null;
 			var _td=null;
-			var _span=null;
-			for(var i=0;i<7;i++){
-				_td=document.createElement("td");
-				_tr.appendChild(_td);
-			}
-			/*产品信息的添加*/
-			var _tds=document.getElementsByTagName("td");
-			_tds[1].style.height="82px";
-			_tds[0].innerHTML=("<input type=\"checkbox\" checked/ style=\"width=\"10px\" height=\"10px\"\">"+"全选");
-			/*复选框改变当前元素的北京颜色*/
-			function changeColor(){
-					if(_tds[0].children[0].checked){
-					_tds[0].parentNode.style.backgroundColor="#fdf0ef";
-					}else{
-					_tds[0].parentNode.style.backgroundColor="white";
-					}
-			}
-			_tds[0].children[0].onclick=changeColor;
+			var _name="",
+				_where="",
+				_src="",
+				_used="",
+				_total="",
+				_price="",
+				_num=0;
+			for(var i=0;i<_arr2.length;i++){
+				let _cookiename=_arr2[i].substring(0,_arr2[i].indexOf("=")).replace(" ","");
+				_name=subCookieUtil.get(_cookiename,"name")/*产品名称*/
+				_where=subCookieUtil.get(_cookiename,"where");//产品的发货地
+				_src=subCookieUtil.get(_cookiename,"src");/*获取产品的SRC地址信息*/
+				_used=subCookieUtil.get(_cookiename,"used");//产品的使用情况
+				_total=parseInt(subCookieUtil.get(_cookiename,"count"));/*获取产品的总共数量*/	
+				 _price=parseInt(subCookieUtil.get(_cookiename,"price"));
+				_arr1[i]=[_name,_where,_src,_used,_total,_price];
+				_tr=document.createElement("tr");
+				for(let n=0;n<7;n++){
+					_td=document.createElement("td");
+					_tr.appendChild(_td);
+					
+				}
+					_tobody.appendChild(_tr);
+					$("td:eq("+_num+")").html("<input type=\"checkbox\" checked/ style=\"width=\"10px\" height=\"10px\"\">"+"全选");
+					_num++;
+					$("td:eq("+_num+")").html("<img alt=\"\" src=\"images/"+_arr1[i][2]+".jpg"+"\"/>"+"<span class=\"names\">"+_arr1[i][0]+"</span>");
+					_num++;
+					$("td:eq("+_num+")").html(_arr1[i][1]);
+					_num++;
+					$("td:eq("+_num+")").html(_arr1[i][5]);
+					_num++;
+					$("td:eq("+_num+")").html("<span class=\"reduce\">-</span>"+"<span class=\"count\">"+_count+"</span>"+"<span class=\"add\">+</span>");
+					_num++;
+					$("td:eq("+_num+")").html("<span class=\"total\">"+_arr1[i][5]*_count+"</span>");
+					_num++;
+					$("td:eq("+_num+")").html("删除");
+					_num++;
+				
+			}/*
+				EventUtil.addEvent(_span.children[1],"click",function(){
+					document.getElementsByTagName("tbody")[0].removeChild(this.parentNode.parentNode.parentNode);
+				});
+				EventUtil.addEvent(_span.children[2],"click",function(e){
+					e=e||window.event;
+					e.stopProgation?e.stopProgation():e.cancelBubble=true;
+					e.preventDefault?e.preventDefault():e.returnValue=false;
+					console.log(this.parentNode);
+					_span.style.display="none";
+				})
+				_span.children[2].style.display="block";
+				_span.children[2].style.float="left";
+				_span.children[2].style.width="44px";
+				_span.children[2].style.backgroundColor="#999999";
+				this.appendChild(_span);
 			
-			_tds[1].innerHTML=("<img alt=\"\" src=\"images/"+_source+".jpg"+"\"/>"+"<span>"+_name+"</span>");
-			_tds[1].children[0].style.float="left";
-			_tds[1].children[0].style.width="82px";
-			_tds[1].children[0].style.margin="20px 15px 20px 0px";
-			_tds[1].children[0].style.height="82px";
-			_tds[1].children[1].style.lineHeight="56px";
-			_tds[1].style.textAlign="left";
-			_tds[2].innerHTML=cookieUtil.get("where");
-			_tds[3].innerHTML=cookieUtil.get("price");
-			_tds[4].innerHTML="<span>-</span>"+"<span>"+_count+"</span>"+"<span>+</span>";
-			
-			_tds[5].innerHTML=parseInt(cookieUtil.get("price"))*_count;
-			_tds[6].innerHTML="删除";
-			_tds[6].style.position="relative";
-			EventUtil.addEvent(_tds[6],"click",function(){
-				_span=document.createElement("span");
+			});
+			EventUtil.addEvent(_tds[4].children[0],"click",function(){
+				if(parseInt(_tds[4].children[1].innerHTML)>1){
+					_tds[4].children[1].innerHTML=parseInt(_tds[4].children[1].innerHTML)-1;
+					_tds[5].innerHTML=_arr1[0][5]*parseInt(_tds[4].children[1].innerHTML);
+				}else{
+					_tds[4].children[1].innerHTML=1;
+					_tds[5].innerHTML=_arr1[0][5];
+				}
+				calCash();
+				totalNumber();
+				
+			});
+			EventUtil.addEvent(_tds[4].children[2],"click",function(){
+				if(parseInt(_tds[4].children[1].innerHTML)<_arr1[0][4]){
+					_tds[4].children[1].innerHTML=parseInt(_tds[4].children[1].innerHTML)+1;
+					_tds[5].innerHTML=parseInt(_arr1[0][5])*parseInt(_tds[4].children[1].innerHTML);
+
+				}else{
+					_tds[4].children[1].innerHTML=_arr1[0][4];
+					_tds[5].innerHTML=parseInt(_arr1[0][5])*_arr1[0][4];
+				}
+				calCash();
+				totalNumber();
+				
+			});
+			*/
+		addEvent(_arr1);
+		calCash();
+		totalNumber();
+		
+}
+		//提示是否要清空购物车
+		function deleteData(_target){
+			var _span=document.createElement("span");	
 				_span.style.display="inline-block";
 				_span.style.width="150px";
 				_span.style.height="86px";
@@ -169,58 +313,143 @@
 				_span.children[1].style.marginLeft="26px";
 				_span.children[1].style.marginRight="8px";
 				_span.children[1].style.backgroundColor="#e93b39";
-				EventUtil.addEvent(_span.children[1],"click",function(){
-					document.getElementsByTagName("tbody")[0].removeChild(this.parentNode.parentNode.parentNode);
-				});
-				EventUtil.addEvent(_span.children[2],"click",function(e){
-					e=e||window.event;
-					e.stopProgation?e.stopProgation():e.cancelBubble=true;
-					e.preventDefault?e.preventDefault():e.returnValue=false;
-					console.log(this.parentNode);
-					_span.style.display="none";
-				})
-				_span.children[2].style.display="block";
-				_span.children[2].style.float="left";
-				_span.children[2].style.width="44px";
-				_span.children[2].style.backgroundColor="#999999";
-				this.appendChild(_span);
-			
-			});
-			EventUtil.addEvent(_tds[4].children[0],"click",function(){
-				if(parseInt(_tds[4].children[1].innerHTML)>1){
-					_tds[4].children[1].innerHTML=parseInt(_tds[4].children[1].innerHTML)-1;
-					_tds[5].innerHTML=parseInt(cookieUtil.get("price"))*(parseInt(_tds[4].children[1].innerHTML)-1);
+				_target.appendChild(_span);//一定要添加到页面中才能获取
+		}
+		//减少数量的判断
+		function reduce(_target,_arr1){
+				var _total=null;
+				var _count=null;
+				var _tr=$("tbody tr");//翻过的错误获取了所有的整个页面中的所有tr元素
+				var _price=0;
+				for(var  i=0;i<_tr.length;i++){
+					if(_tr.eq(i)[0]===$(_target).parentsUntil("tr").parent()[0]){
+						_price=_arr1[i][5];
+						_total=$(".total").eq(i);
+						_count=$(".count").eq(i);
+						break;
+					}
+				}	
+				if(parseInt(_count.html())>1){
+					_count.html(parseInt(_count.html())-1);
+					_total.html(_price*parseInt(_count.html()));
 				}else{
-					_tds[4].children[1].innerHTML=1;
-					_tds[5].innerHTML=parseInt(cookieUtil.get("price"));
+					_count.html("1");
+					_total.html(_price);
 				}
-				calCash(EventUtil);
-			});
-			EventUtil.addEvent(_tds[4].children[2],"click",function(){
-				if(parseInt(_tds[4].children[1].innerHTML)<_total){
-					_tds[4].children[1].innerHTML=parseInt(_tds[4].children[1].innerHTML)+1;
-					_tds[5].innerHTML=parseInt(cookieUtil.get("price"))*(parseInt(_tds[4].children[1].innerHTML)-1);
-
-				}else{
-					_tds[4].children[1].innerHTML=_total;
-					_tds[5].innerHTML=parseInt(cookieUtil.get("price"))*_total;
-				}
-				calCash(EventUtil);
+				calCash();
+				totalNumber();
 				
-			});
-		
-		
+			}
+			
+			//增加物品数量
+		function addNum(_target,_arr1){
+				var _total=null;
+				var _count=null;
+				var _tr=$("tbody tr");
+				var _num=0;
+				var _price=0;
+				for(var i=0;i<_tr.length;i++){
+					if(_tr.eq(i)[0]===$(_target).parentsUntil("tr").parent()[0]){
+						_num=_arr1[i][4];
+						_price=_arr1[i][5];
+						_total=$(".total").eq(i);
+						_count=$(".count").eq(i);
+						break;//找到匹配的元素立即跳出雄环很重要
+					}
+				}	
+				//判断数量的不能超过库存
+				if(_num>1){
+					_count.text(parseInt(_count.text())+1);
+					_total.text(parseInt(_count.text())*parseInt(_price));
+					_num--;
+					_arr1[i][4]=_num;	//每点击一次总数相应的减小
+				}else{
+					_count.text(_count.text());
+					
+				}
+				calCash();
+				totalNumber();
+				
+			}
+		function changeColor(_target){
+						if(_target.checked){
+							_target.parentNode.parentNode.style.backgroundColor="#fdf0ef";
+						}else{
+							_target.parentNode.parentNode.style.backgroundColor="white";
+						}
+					}
+		//事件委托
+		function addEvent(_arr1){
+			$("tr").delegate("td",{click:function(e){
+				e=e||window.event;
+				var _target=e.target||e,srcElement;
+				var _span1=$(this).children("span.reduce")[0];
+				var _span2=$(this).children("span.add")[0];
+				var _input=$(this).children("input")[0];
+				var _delele=this;
+				switch(_target){
+					case _span1:reduce(_target,_arr1);break;
+					case _span2:addNum(_target,_arr1);break;
+					case _input:changeColor(_target);break;
+					case _delele:deleteData(_target);break;
+				}
+			}});
 		}
 			/*计算货品总值*/
-		function calCash(EventUtil){
+		function calCash(){
 			var _cal=document.getElementById("cal");
 			var _tbody=document.getElementsByTagName("tbody")[0];
 			var _money=0;
 			var _len=_tbody.children.length;
+			console.log(_len);
 			for(var i=0;i<_len;i++){
-				_money+=parseFloat(_tbody.children[i].children[5].innerHTML);
+				_money+=parseFloat(_tbody.children[i].children[5].children[0].innerHTML);
 			}		
 			_cal.children[3].children[1].innerHTML=_money.toFixed(2);
+			
+			return _money.toFixed(2);
+		}	
+		/*计算货品总数*/
+		function totalNumber(){
+			var _cal=document.getElementById("cal");
+			var _total=document.getElementById("total");
+			var _tbody=document.getElementsByTagName("tbody")[0];
+			var _len=_tbody.children.length;
+			var _count=0;
+			for(var i=0;i<_len;i++){
+				_count+=parseInt(_tbody.children[i].children[4].children[1].innerHTML);
+			}
+			_total.innerHTML=_count+"件";
+			return _count;
+			
+		}
+		/*取消所有的订单*/
+		function cancelAll(count,money){
+			//var _cancel=document.getElementById("cal").children[0].children[0];
+			var _tr=document.getElementsByTagName("tbody")[0].children;
+			var _len=_tr.length;
+			var _total=document.getElementById("total");
+			var _strong=document.getElementsByTagName("strong")[0];
+				if(this.checked){
+					for(var n=0;n<_len;n++){
+						_tr[0].style.backgroundColor="#fdf0ef";
+						_total.innerHTML=totalNumber();
+						_strong.innerHTML=calCash();
+					}
+				}else{
+					_tr[0].style.backgroundColor="white";
+				
+					_strong.innerHTML="";
+					_total.innerHTML="";
+				}
+		
+			
+		}
+		/*提交订单*/
+		function checkOrder(EventUtil){		
+			var _cal=document.getElementById("cal");
+			var _container=document.getElementById("container");
+			var _cover=document.getElementById("cover");
 			EventUtil.addEvent(_cal.children[4],"mouseover",function(e){
 				e=e||window.event;
 				var _target=e.target||e.srcElement;
@@ -241,13 +470,64 @@
 				_target.children[0].style.opacity=0.7;
 				
 			});
+			/*解算清单*/
+			EventUtil.addEvent(_cal.children[4],"click",function(e){
+				e=e||window.event;
+				var _target=e.target||e.srcElement;
+				switch(_target.id){
+					case "first":
+					location.href="head.html";break;
+					case "second":
+					if(2>5){
+					/*还要进行登录注册的判断*/
+					} else{
+						_container.style.display="block";
+						_container.style.zIndex=999;
+						_cover.style.display="block";
+					};break;
+				}
+			});
+			var _span=_cal.children[0].getElementsByTagName("span")[0];
+			EventUtil.addEvent(_span,"mouseover",function(e){
+				e=e||window.event;
+				var _target=e.target||e.srcElement;
+				switch(_target.id){
+					case "span1":
+					_target.children[0].src="images/pic01.png";break;
+					case "span2":
+					_target.style.color="#e93b39";break;
+				}
+			});
+			EventUtil.addEvent(_span,"mouseleave",function(e){
+				e=e||window.event;
+				var _target=e.target||e.srcElement;
+					_target.children[0].children[0].src="images/pic02.png";
+					_target.children[1].style.color="#555";
+			});
+			EventUtil.addEvent(_container.children[0].children[2],"click",function(e){
+				e=e||window.event;
+				_container.style.display="none";
+				_cover.style.display="none";
+			});
 			
-		}	
+		}
+		
 			
 		
 		</script>
 	</head>
 	<body>
+		<div class="createheader">
+			<div class="headcontent">
+				<div class="iconlogo">
+					<a href="head.html" target="_blank"><img alt="" src="images/logo.png"/></a>
+				</div>
+				<div class="carprocess">
+					<img alt="" src="images/c_05.jpg"/>
+				</div>
+			
+			</div>
+		</div>
 		<table  cellpadding="20px">
 			<thead>
 				<tr>
@@ -271,13 +551,48 @@
 			
 		</table>
 		<div id="cal">
-			<p><input type="checkbox" checked name="chooseall"/><label for="chooseall">全选</label><span><span><img alt="" src="images/pic02.png"/></span><span>删除选中的商品</span><span></span></span><span>商品总计:</span><span></span></p>
+			<p><input type="checkbox" checked name="chooseall"/><label for="chooseall">全选</label><span><span id="span1" class="span1"><img alt="" src="images/pic02.png"/></span>
+			<span id="span2">删除选中的商品</span></span><span>商品总计:</span><span id="total"></span></p>
 			<p>包装数量总计:<span></span></p>
 			<p>返利库币:<span></span></p>
 			<p><span>商品金额总计(不含税费):</span><strong></strong></p>
 			<p><span id="first">继续购物</span><span id="second">立即结算</span></p>
 			
 		</div>
+		<div id="container">
+			<div class="confirm">
+				<div>
+					<h3>快速注册</h3>
+					<p>手机号</p>
+					<p><input type="text"/></p>
+					<p>验证码</p>
+					<p><input type="text"/ class="data"><span></span><span>换一换</span></p>
+					<p>短信密码</p>
+					<p><input type="text"/></p>
+					<p class="pra"><input type="button" value="获取短信密码" class="password"/></p>
+					<p class="pra"><input type="button"/ value="注册" class="register"></p>
+					<p >我们会将您注册为寺库会员，手机号为您的用户名，密码将通过免费短信发送给您</p>
+					
+				</div>
+				<div>
+					<h3>登录</h3>
+					<p>用户名</p>
+					<p><input type="text"/></p>
+					<p>密码</p>
+					<p class="pra"><input type="text"/></p>
+					<p class="pra"><input type="button" value="登录" class="register login"/><span>忘记密码 ?</span></p>
+					<p><a href="">腾讯</a><a href="">迅雷</a></p>
+					
+					
+					
+				</div>
+				<div class="x">
+					
+				</div>
+			</div>
+		</div>
+		
+		<div id="cover"></div>
 	
 	</body>
 </html>
