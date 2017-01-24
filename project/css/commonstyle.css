@@ -1,0 +1,69 @@
+body{font-family:"΢���ź�";
+	font-size:12px;
+	margin:0;
+	padding:0;
+	border:none;
+}
+html,div,p,span,form,legend,fieldset,h1,h2,h3,h4,h5,h6,hr,ul,li,ol,dl,dd,dt,nr,select{
+	margin:0;padding:0;
+	border:none;
+}
+button,img,a,input,textarea,th,td,table,lable{
+	margin:0;padding:0;
+}
+img{border:none;}
+a{text-decoration:none;color:#000}
+ul,li,ol{list-style:none}
+img{border:none}
+.clear{height:0;overflow:hidden;font-size:0;clear:both}
+body,html{height:100%}
+a:hover{color:#2e16b6;}
+.head{width:100%;height:162px;}
+.container{margin:0 auto;width: 1200px;height: auto;position:relative;}
+.container .top{width:100%;height:30px;}
+.container .top div{float:left;}
+.container .top div:first-child{width:508px;height: 125px;padding-top:10px;}
+.container .top div:last-child{width:580px;}
+.container .top div:last-child a{padding: 10px;}
+/*中间搜索框的样式设置*/
+.middle{width:100%;height:132px;position: relative;}
+.middle div{position: absolute;}
+.middle div:first-child{width:484px;height: 50px;left:220px;top: 12px;}
+.middle div:first-child #middlleleft{width: 84%;height: 34px;top: 0;left: 0}
+.middle div:first-child #middlleleft input{width: 100%;line-height:34px;}
+.middle div:first-child #middlleright{width: 14%;height: 36px;top: 0;left:85%;}
+.middle div:first-child #middlleright a{display: block;background-color:#382f6b;line-height:36px;width: 100%;color: #FFFFFF;text-align: center;opacity: 0.8; }
+.middle div:first-child #middlleright a:hover{opacity: 1;}
+.middle div:nth-child(2){width: 710px;height: 18px;left:220px;top: 52px;}
+.middle div:nth-child(3){width: 926px;height: 45px;left:220px;top:60px; }
+.third a{display:inline-block;height:auto;width: auto;}
+.third a span{display: inline-block;cursor: pointer;margin:20px 40px 0 0;}
+.third a span i{font-size:14px;color:#333;font-style: normal;}
+.third a span i:hover{color:#382f6b;}
+.middle div:nth-child(4){width: 96px;height:128px;top: 12px;right:10px;background:url("../images/pic3.png") no-repeat;}
+/*左侧菜单栏的样式设置*/
+.bottom{width:180px;height: 592px;position: absolute;top: 130px;left:0px;z-index: 99;}
+.bottomhead{width:100%;height:32px;background-color:#382f6b;}
+.bottomhead a{color: #f1f1f1;display:block;width:100%;line-height:32px;text-align:center;}
+.bottomfoot{width:180px;height:560px;}
+.bottomfoot dl{width:180px;height:62px;position: relative;line-height: 28px;}
+.bottomfoot dl strong{color:#382f6b;}
+.bottomfoot dl dt{padding-left:16px;overflow: hidden;}
+.bottomfoot dl dt strong a,.bottomfoot dl dt p a{color: #f1f1f1;padding-right: 10px;}
+.bottomfoot dl:nth-child(odd){background-color: #463b7f;}
+.bottomfoot dl:nth-child(even){background-color:#382f6b;}
+.bottomfoot dl dd{position:absolute;left: 180px;top: 0px;
+                    width:298px;height:404px;background-color: #fff;padding:20px;line-height:20px;display: none;
+                    border:1px solid #463b7f;}
+.bottomfoot dl:nth-child(3) dd{top:-58px;}
+.bottomfoot dl:nth-child(4) dd{top:-120px;}
+.bottomfoot dl:nth-child(5) dd{top:-140px;}
+.bottomfoot dl:nth-child(6) dd{top:-195px;}
+.bottomfoot dl:nth-child(7) dd{top:-258px;}
+.bottomfoot dl:nth-child(8) dd{top:-316px;}
+.bottomfoot dl:nth-child(9) dd{top:-390px;}
+.bottomfoot dl dd li{padding-bottom: 14px;border:none;margin-bottom:22px;}
+.bottomfoot dl dd li:first-child{border-bottom: 1px dashed grey;}
+.bottomfoot dl dd li:nth-child(2){border-bottom:1px dashed grey;}
+.bottomfoot dl dd li div a{padding:0 10px;}
+.bottomfoot dl dd li div a:first-child{padding:0 10px 0 0;}
