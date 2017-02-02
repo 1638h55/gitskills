@@ -16,8 +16,6 @@ function ajaxRequest(_method,_url,_ansy,_parameter,_fn){
 		_xhr.onreadystatechange=function(){
 			if(_xhr.readyState==4){
 				_fn(_xhr.responseText);
-				//_fn==_fx;
-				//_fx(_xhr.responseText);
 			}
 		}
 		_xhr.open(_method,_url,_ansy);

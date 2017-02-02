@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta chaset="UTF-8"/>
+	<title>this is footpage</title>
+	<style></style>
+	<script></script>
+</head>
+<body>
+	<div></div>
+</body>
+</html>
