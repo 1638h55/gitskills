@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <style>
+        .head{width: 100%;height:70px;background-color: rgb(0,0,0);}
+        .headcon{width: 1200px;height: 70px;margin:0 auto;}
+        .headcon div{height: 70px;}
+        .headl{width: 30px;
+            float: left;
+            background:url("images/logo_01.png") no-repeat;}
+        .headr{width: 280px;float: right;}
+        .headr a{display:inline-block;
+            width: 68px;
+            height: 70px;
+            padding: 0 10px;
+            line-height:70px;
+            cursor: pointer;
+            color: #666;}
+        .headr a:hover{color: #e6c45e;}
+        .regbox{width: 100%;
+            height: 720px;
+            padding: 30px 0px;
+            background-color: #fdf8f4;}
+        .regbox01{width: 1200px;
+            margin:0 auto;
+            height: 100%;
+            background:url("images/login_01.jpg") no-repeat;}
+        .logincenter{width: 310px;
+            height: auto;
+            margin-top: 120px;
+            padding:30px 35px;
+            float:right;
+            background-color: #fff;
+            overflow:visible;
+            box-shadow: 0 0 23px rgba(0,0,0,.1);
+        }
+        .logincenter h1{width:100%;
+                            height:20px;
+                            color:#f19108;
+                            font:normal 20px  microsoft yahei;
+                            text-align:center;
+                            margin-bottom:24px;
+        }
+        .errorpig{width: 100%;
+                    height:auto;
+                    border: 1px solid #ffac76;
+                    background:#ffffcf url("images/error_tips.png") no-repeat left center;
+                    padding-left: 30px;
+                    margin-bottom: 12px;
+                    line-height: 25px;
+                    color: #ff0200;
+                    display: none;
+        }
+        .logincenter ul li{width:100%;margin-bottom:15px;}
+        .logincenter ul li:first-child{height:50px;}
+        .logincenter ul li:nth-child(2){heihht:50px;}
+        .logincenter ul li:nth-child(3){display:none;
+                                            height: auto;}
+        .logincenter ul li:nth-child(4){height:16px;
+                                            position:relative;}
+        .username, .userpassword{width:100%;
+                    height:100%;
+                    position:relative;
+        }
+
+        .username label,.userpassword label{
+                        position: absolute;
+                        height: 50px;
+                        line-height: 50px;
+                        left: 10px;
+                        top: 0;
+                        color: #999;
+                        cursor: text;
+        }
+        .username input,.userpassword input{
+                        width: 298px;
+                        height: 20px;
+                        padding: 14px 5px;
+                        border: 1px solid rgb(222,222,222);
+        }
+        .username i,.userpassword i{
+                      position:absolute;
+                      width: 15px;
+                      height: 17px;
+                      position: absolute;
+                      right: 10px;
+                      top: 16px;
+
+        }
+        .username i{
+                      background:url("images/login_04.png") no-repeat 0 0;
+        }
+        .userpassword i{
+                      background: url("images/login_04.png") no-repeat 0 -19px;
+        }
+        .logincenter ul li:nth-child(4) label{
+                                                position: absolute;
+                                                top:-5px;
+                                                left:0;
+                                                width:auto;
+                                                height:auto;
+                                                text-align: center;
+                                                color:#999;
+        }
+        .logincenter ul li:nth-child(4) input{
+            margin-right:5px;
+            float:left;
+        }
+        .subbutton{
+            width:100%;
+            height: 50px;
+            padding:8px 0px;
+        }
+        .subbutton input{
+            width:100%;
+            height:100%;
+            line-height: 50px;
+            text-align:center;
+            color:#fff;
+            font-weight:bold;
+            font-size:20px;
+            cursor:pointer;
+            background-color:#f19108;
+            border:none;
+            box-shadow: 0px 0px 3px rgb(190,0,0);
+
+        }
+        .partner{width: 100%;
+                    height: 60px;
+                    padding-bottom: 30px;
+        }
+        .partner p{
+            width:100%;
+            height:20px;
+            padding:5px 0px;
+            line-height:20px;
+            color:#999;
+        }
+        .partner p img{
+            float:left;
+            margin-right:5px;
+            cursor:pointer;
+        }
+         .ask{
+             width: 100%;
+             height: 15px;
+         }
+         .ask .fl{
+             float: left;
+             width: 170px;
+             height: 15px;
+             color: #999;
+         }
+         .ask .fl a{
+             color: #f19108;
+         }
+         .ask .fr{
+             float: right;
+             width: 60px;
+             height: 15px;
+         }
+         .ask .fr a{
+             color:#999;
+         }
+        .clearfix::after{
+            content: " ";
+            display:block;
+            font-size:0;
+            height:0;
+            visibility:hidden;
+            clear:both;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/login.js"></script>
+</head>
+<body>
+        <div class="head">
+            <div class="headcon clearfix">
+                <div class="headl"></div>
+                <div class="headr">
+                    <a href="head.html" target="_blank">寺库首页</a>
+                    <a href="" target="_blank">收藏寺库</a>
+                    <a href="" target="_blank">寺库APP</a>
+                </div>
+            </div>
+        </div>
+        <div class="regbox">
+            <div class="regbox01">
+                    <div class="logincenter">
+                       <h1>欢迎登录</h1>
+                        <div class="errorpig">
+                            请输入登录密码
+                        </div>
+                        <ul>
+                            <li>
+                                <div class="username">
+                                    <label>用户名</label>
+                                    <input type="text"/>
+                                    <i></i>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="userpassword">
+                                    <label>密码</label>
+                                    <input type="text"/>
+                                    <i></i>
+                                </div>
+                            </li>
+                            <li>
+                                <div></div>
+                            </li>
+                            <li>
+                                <label><input type="checkbox" checked/>记住账号</label>
+                            </li>
+                        </ul>
+                        <div class="subbutton">
+                            <input type="button" value="立即登录" />
+                        </div>
+                        <div class="partner">
+                            <p>合作用户账号登录</p>
+                            <p class="clearfix">
+                                <img alt="QQ登录" src="images/qq.jpg" onlick="qqLogin()"/>
+                                <img alt="迅雷登录" src="images/xunLei.png" onlick="xunLogin()"/>
+                            </p>
+                        </div>
+                        <div class="ask">
+                            <span class="fl">你还不是寺库会员?<a href="register.html">免费注册</a></span>
+                            <span class="fr"><a href="" target="_blank">忘记密码</a></span>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="footpage">
+
+        </div>
+</body>
+</html>

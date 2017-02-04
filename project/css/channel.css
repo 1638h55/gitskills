@@ -1,10 +1,43 @@
 .content{width:100%;height:auto;}
 .content div{margin:0 auto;}
-.pra{width:990px;height:24px;}
-.pra span  img{width:450px;}
+.pra{width:1088px;
+    height:24px;
+    text-align: center;
+    background: url("../images/bg-1.jpg") repeat-x left center;
+    height: 24px;
+    position: relative;}
+.pra i{
+    background: url("../images/bg-2.jpg") no-repeat;
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    width: 9px;
+    height: 11px;
+    margin-top: -5px
+}
+.pra span{
+    display: inline-block;
+    font: bold 20px Microsoft Yahei;
+    color: #666;
+    padding: 0 40px;
+    background: #fff;
+    position: relative;
+}
+.pra i.l-i{
+    left:0px;
+}
+.pra i.r-i{
+    right:0;
+}
 .maincontent{width:1088px;height:auto;}
 .maincontent ul{width:100%;}
-.maincontent ul li{width:200px;margin:35px 24px 0 0;padding:15px;float:left;overflow:hidden;}
+.maincontent ul li{width:200px;
+                    margin:35px 24px 0 0;
+                    padding:15px;
+                    float:left;
+                    overflow:hidden;
+                    cursor: pointer;
+                    }
 .products-list:after{ 
             content: '';
             display: block;
@@ -14,3 +47,7 @@
 .maincontent ul li div img{width:200px;height:200px;opacity:1;}
 .maincontent ul li p.name{color:#666;padding-top:40px;height:36px;line-height:18px;}
 .maincontent ul li p.price{line-height:18px;}
+.footpage{
+    width:100%;
+    height: auto;
+    margin-top:50px;}

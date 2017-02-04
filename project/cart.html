@@ -10,8 +10,7 @@
 			.headcontent{width:968px;height:70px;margin:0 auto;}
 			.iconlogo{float:left;}
 			.carprocess{float:right;}
-			table{width:968px;height:auto;margin:0 auto;border-spacing:0px;border:1px solid white;}
-			table tr{margin-top:1px;}
+			table{width:968px;height:auto;margin:0 auto;border-spacing:0px;border:1px solid grey;}
 			thead tr{width:100%;height:42px;background-color:#ececec;}
 			table th {text-align:center;line-height:42px;}
 			table th :first-child{width:70px;}
@@ -22,9 +21,9 @@
 			table th :nth-child(6){width:126px;}
 			table th :nth-child(7){width:90px;}
 			#choose {width:10px;height:10px;}
-			tbody{border:1px solid white;}
-			tbody tr{background-color:#fdf0ef;width:100%;text-align:center;height:122px;}
-			tbody tr td{height:82px;}
+			tbody tr{background-color:#fdf0ef;width:100%;text-align:center;height:122px;
+					}
+			tbody tr td{height:82px;border-top:1px solid #fff;}
 			tbody tr td:nth-child(2) span.names{line-height:56px;text-align:left;float:left;}
 			tbody tr td:nth-child(2) img{float:left;width:82px;height:82px;margin:20px 15px 20px 0px;}
 			tbody tr td:nth-child(5) span:nth-child(even){background-color:white;display:inline-block;width:36px;line-height:18px;text-align:center;border:0.5px solid #ececec;}	
@@ -63,8 +62,8 @@
 			 .confirm input{height:32px;}
 			.confirm div p span{margin-left:3px;}
 			.input.data+span{display:inline-block;width:68px;height:28px;border:1px solid #000;}
-			.password{width:94px;height:24px;line-height:24px;text-align:center;background-color:#fff;}
-			.register{width:56px;height:24px;line-height:24px;text-align:center;background-color:#ed8f07;}
+			.password{width:94px;height:24px;line-height:24px;text-align:center;background-color:#fff;border: none;}
+			.register{width:56px;height:24px;line-height:24px;text-align:center;background-color:#ed8f07;border: none;}
 			input.data{width:70px;}
 			.pra{margin-bottom:20px;}
 			#cover{width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:998;position:absolute;left:0;top:0;display:none;}
@@ -401,7 +400,6 @@ function addMessage(EventUtil,subCookieUtil){
 			var _tbody=document.getElementsByTagName("tbody")[0];
 			var _money=0;
 			var _len=_tbody.children.length;
-			console.log(_len);
 			for(var i=0;i<_len;i++){
 				_money+=parseFloat(_tbody.children[i].children[5].children[0].innerHTML);
 			}		
@@ -450,6 +448,8 @@ function addMessage(EventUtil,subCookieUtil){
 			var _cal=document.getElementById("cal");
 			var _container=document.getElementById("container");
 			var _cover=document.getElementById("cover");
+			var _reger=document.getElementById("regger");
+			var _login=document.getElementById("login");
 			EventUtil.addEvent(_cal.children[4],"mouseover",function(e){
 				e=e||window.event;
 				var _target=e.target||e.srcElement;
@@ -509,9 +509,17 @@ function addMessage(EventUtil,subCookieUtil){
 				_container.style.display="none";
 				_cover.style.display="none";
 			});
+			EventUtil.addEvent(_reger,"click",function(e){
+			   e=e||window.event;
+			   location.href="register.html";
+			});
+			EventUtil.addEvent(_login,"click",function(e){
+			    e=e||window.event;
+			    location.href="login.html";
+			})
+
 			
 		}
-		
 			
 		
 		</script>
@@ -551,7 +559,7 @@ function addMessage(EventUtil,subCookieUtil){
 			
 		</table>
 		<div id="cal">
-			<p><input type="checkbox" checked name="chooseall"/><label for="chooseall">全选</label><span><span id="span1" class="span1"><img alt="" src="images/pic02.png"/></span>
+			<p><input type="checkbox" checked id="chooseall"/><label for="chooseall">全选</label><span><span id="span1" class="span1"><img alt="" src="images/pic02.png"/></span>
 			<span id="span2">删除选中的商品</span></span><span>商品总计:</span><span id="total"></span></p>
 			<p>包装数量总计:<span></span></p>
 			<p>返利库币:<span></span></p>
@@ -566,11 +574,11 @@ function addMessage(EventUtil,subCookieUtil){
 					<p>手机号</p>
 					<p><input type="text"/></p>
 					<p>验证码</p>
-					<p><input type="text"/ class="data"><span></span><span>换一换</span></p>
+					<p><input type="text"class="data"/><span></span><span>换一换</span></p>
 					<p>短信密码</p>
 					<p><input type="text"/></p>
 					<p class="pra"><input type="button" value="获取短信密码" class="password"/></p>
-					<p class="pra"><input type="button"/ value="注册" class="register"></p>
+					<p class="pra"><input type="button" value="注册" class="register" id="regger"/></p>
 					<p >我们会将您注册为寺库会员，手机号为您的用户名，密码将通过免费短信发送给您</p>
 					
 				</div>
@@ -580,11 +588,8 @@ function addMessage(EventUtil,subCookieUtil){
 					<p><input type="text"/></p>
 					<p>密码</p>
 					<p class="pra"><input type="text"/></p>
-					<p class="pra"><input type="button" value="登录" class="register login"/><span>忘记密码 ?</span></p>
-					<p><a href="">腾讯</a><a href="">迅雷</a></p>
-					
-					
-					
+					<p class="pra"><input type="button" value="登录" class="register login" id="login"/><span>忘记密码 ?</span></p>
+					<p><a href=""><img alt="" src="images/qq.jpg"/></a><a href=""><img alt="" src="images/xunlei.png"/></a></p>
 				</div>
 				<div class="x">
 					

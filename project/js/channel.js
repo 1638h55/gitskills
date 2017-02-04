@@ -84,9 +84,10 @@ $(document).ready(function(){
 		}
 		
 	};
-	loadMessage(subCookieUtil);
+	loadHead();
+   loadMessage(subCookieUtil);
 })
-//��ȡͼƬ�Լ�document��������ͼƬ
+//��ȡͼƬ�Լ�document��������ͼƬ
 function loadMessage(subCookieUtil){
 	$.post("json/products.json",function(data){
 		var _jewelry=data["products"]["channel"]["categories"]["jewelry"];
@@ -119,26 +120,31 @@ function loadMessage(subCookieUtil){
 						a="<a>"+img+"</a>";
 						_div="<div>"+a+"</div>";
 						_p3="<p class=\"name\">"+_jewelry[key][k]["name"]+"</p>";
-						_p4="<p class=\"price\">$ "+_jewelry[key][k]["price"]+"</p>";
+						_p4="<p class=\"price\">"+_jewelry[key][k]["price"]+"</p>";
 						_li+="<li>"+_div+_p3+_p4+"</li>";
-						_h3+=$(this).scrollTop();
+
 					}
 					_ul.innerHTML=_li;
-					$(".maincontent")[i].appendChild(_ul);
+					_li="";
+					$(".maincontent").eq(i).append(_ul);
+					$("ul").not($(".products-list")).addClass("products-list");
 					i++;
+					loadFoot();
+					_h3+=$(this).scrollTop();
 				}
 			}
-			//addEvent();
 		});
-		addEvent(subCookieUtil);
+		adddEvent(subCookieUtil);
 	},"json");
 }
-//���¼�
-function addEvent(subCookieUtil){
-	$("ul").delegate("li",{
+//���¼�
+function adddEvent(subCookieUtil){
+	$(".maincontent").delegate("li",{
 		mouseenter:function(e){
 			e=e||window.event;
 			var _target=e.target||e.srcElement;
+			e.stopPropagation?e.stopPropagation():e.cancelBubble=true;
+			e.preventDefault?e.preventDefault():e.returnValue=false;
 			$(this).css({"background-color":"#f5f5f5"});
 			$(this).children("div").children().children().animate({opacity:0.7},100).animate({opacity:1},100);
 			$(this).children("p.name").hover(function(){$(this).css({"color":"#9c003f"})});
@@ -148,10 +154,8 @@ function addEvent(subCookieUtil){
 		mouseleave:function(){
 			$(this).css({"background":"#fff"});
 		},
-		//
 		"click":function(e){
 			e=e||window.event;
-			var _target=e.target||e.srcElement;
 			var _div=$(this).parentsUntil("div").parent();
 			var _li=null;
 			var key="";
@@ -170,7 +174,7 @@ function addEvent(subCookieUtil){
 				
 			}
 			if(_div.hasClass("second")){
-				_li=$(".first ul li");
+				_li=$(".second ul li");
 				key="necklace";
 				for(let i=0;i<_li.length;i++){
 					if(this===_li[i]){
@@ -183,7 +187,7 @@ function addEvent(subCookieUtil){
 				
 			}
 			if(_div.hasClass("third")){
-				_li=$(".first ul li");
+				_li=$(".third ul li");
 				key="more";
 				for(let i=0;i<_li.length;i++){
 					if(this===_li[i]){
@@ -196,7 +200,7 @@ function addEvent(subCookieUtil){
 				
 			}
 			if(_div.hasClass("fourth")){
-				_li=$(".first ul li");
+				_li=$(".fourth ul li");
 				key="hot";
 				for(let i=0;i<_li.length;i++){
 					if(this===_li[i]){
@@ -212,11 +216,32 @@ function addEvent(subCookieUtil){
 		}
 	});
 }
+//请求到的html文件一定不能有和请求的文件同名函数！！！非常重要
 function getMessage(key,k,subCookieUtil){
 	$.post("json/products.json",function(data){
+		console.log(data);
 		var _jewelry=data["products"]["channel"]["categories"]["jewelry"];
 			var _data=_jewelry[key][k];
+			//console.log(_data);
 			subCookieUtil.setAll(key+k,_data);
 			
-	},"json")
+	},"json");
+}
+function loadFoot(){
+	$.post("footpage.html",function(data){
+        $(".footpage").html(data);
+	});
+}
+function loadHead(){
+	$.post("commonstyle.html",function(data){
+		$(".header").html(data);
+		$(".bottomfoot").css({"display":"none"});
+		$(".bottomhead").mouseenter(function(){
+			$(".bottomfoot").show("slow");
+		});
+		$(".bottom").mouseleave(function(){
+			$(".bottomfoot").hide();
+		});
+
+	});
 }

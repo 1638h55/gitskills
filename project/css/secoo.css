@@ -21,24 +21,25 @@
 					height: 50px;
 					left:220px;
 					top: 12px;}
-.middle div:first-child #middlleleft{width: 84%;
+.middle div:first-child .middlleleft{width: 84%;
 									height: 34px;
 									top: 0;
 									left: 0}
-.middle div:first-child #middlleleft input{width: 100%;
-									line-height:34px;}
-.middle div:first-child #middlleright{width: 14%;
+.middle div:first-child .middlleleft input{width: 100%;
+												line-height:32px;
+												border: 1px solid #463b7f;}
+.middle div:first-child .middlleright{width: 14%;
 						height: 36px;
 						top: 0;
 						left:85%;}
-.middle div:first-child #middlleright a{display: block;
+.middle div:first-child .middlleright a{display: block;
 									background-color:#382f6b;
-									line-height:36px;
+									line-height:34px;
 									width: 100%;
 									color: #FFFFFF;
 									text-align: center;
 									opacity: 0.8; }
-.middle div:first-child #middlleright a:hover{opacity: 1;}
+.middle div:first-child .middlleright a:hover{opacity: 1;}
 .middle div:nth-child(2){width: 710px;
 						height: 18px;
 						left:220px;
@@ -179,7 +180,20 @@
 		height:198px;
 		margin-right:10px;
 		}
-	
+.fixon{width:100%;
+		height: 50px;
+		position: fixed;
+		top: 0px;
+		z-index: 99;
+		background-color: #fff;
+		box-shadow: 0 0 3px #ccc;
+		display: none;}
+.fixon .middle{width: 1200px;
+				height: 50px;
+				margin:0 auto;
+				background: url("../images/min_logo.png") no-repeat center;
+				}
+.fixon .middle .middlleleft,.fixon .middle .middlleright {margin-top:-5px;}
 	
 		
 		

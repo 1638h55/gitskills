@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="css/common.css"/>
+    <style>
+        .head{width: 100%;height:70px;background-color: rgb(0,0,0);}
+        .headcon{width: 1200px;height: 70px;margin:0 auto;}
+        .headcon div{height: 70px;}
+        .headl{width: 30px;
+                float: left;
+                background:url("images/logo_01.png") no-repeat;}
+        .headr{width: 280px;float: right;}
+        .headr a{display:inline-block;
+                width: 68px;
+                height: 70px;
+                padding: 0 10px;
+                line-height:70px;
+                cursor: pointer;
+               color: #666;}
+        .headr a:hover{color: #e6c45e;}
+        .regbox{width: 100%;
+                height: auto;
+                padding: 30px 0px;
+                background-color: #fdf8f4;}
+        .regbox01{width: 1200px;
+                    margin:0 auto;
+                    height: auto;
+                    background:url("images/login_01.jpg") no-repeat;}
+        .regcenter{width: 310px;
+                    height: auto;
+                    margin-top: 80px;
+                    padding:30px 35px;
+                    float:right;
+                    background-color: #fff;
+                    overflow:visible;}
+        .regcon{width: 100%;
+                height: 100%;
+                color:#666;
+                }
+        .regon li{width:100%;height: 82px;}
+        .regtips{width: 100%;
+                    height: 40px;
+                    line-height: 40px;}
+        .logintips{width:100%;
+                    height: 42px;
+                    line-height: 42px;}
+        .regtips span:first-child{
+            float: left;}
+        .regtips span:nth-child(2){
+            float: right;
+            height:100%;
+            width:auto;
+        }
+        .logintips span{display:inline-block;height: 42px;line-height: 42px;}
+        .logintips span img{vertical-align: middle;margin:0 5px;}
+        .logintips input{width:298px;
+                            height: 20px;
+                            padding: 10px 5px;
+                            border: 1px solid #dedede;}
+         input.hide{width: 115px;
+                height: 20px;
+                line-height: 20px;
+                padding: 10px 5px;
+                }
+         .check{width:100%;height: 54px;}
+         .check div{width: 100%;height: 40px;padding-top: 12px;line-height: 40px;}
+         .check div span.checkspan{margin-left: 6px;
+                                    display:inline-block;
+                                    width: 106px;
+                                    height: 25px;
+                                    margin: 8px 0 0 5px;
+                                    background:url("images/btn_bg.png") repeat-x 0px -222px;
+                                    line-height: 25px;
+                                    text-align: center;
+                                     border: 1px solid #cfcfcf;
+                                     color: #5d5d5d;  }
+
+         .check02,.check{display: none;}
+         .invite{width: 100%;height: auto;}
+         .invite div.cc{width: 100%;height: auto;}
+         .cc span{float: left;width: 100px;height: 40px;line-height: 40px;}
+         .cc div{width: 100%;height: 40px;float:left;display:none;}
+         label{margin-top: 15px;
+                }
+         #choose,#real{width: 13px;height: 13px;
+                vertical-align: middle;
+             margin-right:5px;}
+         .right-now{width:100%;
+                    height: 140px;
+                    margin-top: 10px; }
+         .right-now p{width: 100%;
+                        height: 20px;
+                        line-height: 20px;
+                        padding:8px 0px;}
+         #indexlogin{width: 100%;
+                    height: 50px;
+                    background-color:#f19108;
+                    font-weight: bold;
+                    font-size: 16px;
+                    text-align: center;
+                    line-height: 50px;
+                    color: #fff;
+                    border:none;}
+         #iperror{
+             width:100%;
+             height: auto;
+            }
+         .huiyuan{width: 100%;
+                    height: 15px;
+                    padding-top: 30px;}
+         .huiyuan a{color:#f19108;margin-left: 5px;}
+         #error2{color: red;font-weight: bold;}
+        .clearfix::after{
+            content:" ";
+            display: block;
+            fonsize:0;
+            height: 0;
+            visibility:hidden;
+            
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/reg.js"></script>
+</head>
+<body>
+    <div class="head">
+        <div class="headcon clearfix">
+            <div class="headl"></div>
+            <div class="headr">
+                <a href="head.html" target="_blank">寺库首页</a>
+                <a href="" target="_blank">收藏寺库</a>
+                <a href="" target="_blank">寺库APP</a>
+            </div>
+        </div>
+    </div>
+    <div class="regbox">
+        <div class="regbox01 clearfix">
+            <div class="regcenter">
+                <div class="regcon">
+                    <ul class="clearfix">
+                        <li>
+                            <div class="regtips clearfix">
+                                <span>用户名</span>
+                                <span class="tips">请输入您的手机号</span>
+                            </div>
+                            <div class="logintips">
+                                <input type="text"/>
+                            </div>
+                        </li>
+                        <li class="check02">
+                            <div class="regtips clearfix">
+                                <span>验证码</span>
+                                <span class="tips"></span>
+                            </div>
+                            <div class="logintips">
+                                <span><input class="hide" type="text"/><span><img id="changep" alt="" src="images/simple1.png" onclick="changeImg()"/></span><span id="change" onclick="changeImg()">换一换</span></span>
+                            </div>
+                        </li>
+                        <li class="check">
+                            <div>
+                                <input class="hide" type="text"/><span class="checkspan">点击获取验证码</span>
+                                <span class="tips">hellow</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="regtips clearfix">
+                                <span>密码</span>
+                                <span class="tips"></span>
+                            </div>
+                            <div class="logintips">
+                                <input type="text"/>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="regtips clearfix">
+                                <span>确认密码</span>
+                                <span class="tips"></span>
+                            </div>
+                            <div class="logintips">
+                                <input type="text"/>
+                            </div>
+                        </li>
+                        <li class="invite">
+                            <div class="cc clearfix">
+                                <span><input id="real" type="checkbox" /><label for="real">贵宾邀请码</label></span>
+                                <div class="app"></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="right-now">
+                        <input type="button" value="立即注册" id="indexlogin"/>
+                        <div id="iperror"></div>
+                        <p><label><input id="choose" type="checkbox"/>我已阅读并同意</label><a href="" target="_blank">《寺库服务条款》</a></p>
+                        <div id="error2" style="display: none">请接收寺库条款</div>
+                        <div class="huiyuan"><span>您已经是寺库会员?</span><a href="login.html">请直接登录</a></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="footpage">
+
+    </div>
+</body>
+</html>

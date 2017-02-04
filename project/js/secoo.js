@@ -183,154 +183,157 @@ function floor(EventUtil){
 //楼层效果从161开始
 $(document).scroll(function(){
     var _height=$(this).scrollTop();
-    var i=0;
+    var s=0;
     if(_height>400 && _height<7000){
         $(".fixedpart").show("slow");
+        $(".fixon").show();
             if(_height>400 && _height<1000){
-                i=0;
-                $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-                $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-                $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-                $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+                s=0;
+                $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+                $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+                $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+                $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
             }
         if(_height>1000 && _height<1700) {
-            i = 1;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display": "block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display": "none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display": "none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display": "block", "font-size": 14, "color": "#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display": "block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display": "none"});
+            s = 1;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display": "block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display": "none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display": "none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display": "block", "font-size": 14, "color": "#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display": "block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display": "none"});
         }
         if(_height>1700 && _height<2300){
-                i=2;
-                $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-                $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-                $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-                $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-               $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-                $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+                s=2;
+                $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+                $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+                $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+                $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+               $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+                $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
         if(_height>2300 && _height<2600){
-            i=3;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=3;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
         if(_height>2600 && _height<2900){
-            i=3;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=3;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
 		if(_height>2900 && _height<3300){
-            i=4;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=4;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
 		if(_height>3300 && _height<3700){
-            i=5;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=5;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
 		if(_height>3700 && _height<4100){
-            i=6;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=6;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
 		if(_height>4100 && _height<4500){
-            i=7;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=7;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
 		if(_height>4500 && _height<4900){
-            i=8;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=8;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
 		if(_height>4900 && _height<5300){
-            i=9;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=9;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
 		if(_height>5300 && _height<5700){
-            i=10;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=10;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
 		if(_height>5700 && _height<6000){
-            i=11;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=11;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
 		if(_height>6000 && _height<6400){
-            i=12;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=12;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
 		if(_height>6400 && _height<6700){
-            i=13;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=13;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
         }
 		if(_height>6700 && _height<7000){
-            i=14;
-            $($("#fixedcontent a")[i-1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i-1]).children().last().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().first().css({"display":"none"});
-            $($("#fixedcontent a")[i]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
-            $($("#fixedcontent a")[i+1]).children().first().css({"display":"block"});
-            $($("#fixedcontent a")[i+1]).children().last().css({"display":"none"});
+            s=14;
+            $($("#fixedcontent a")[s-1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s-1]).children().last().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().first().css({"display":"none"});
+            $($("#fixedcontent a")[s]).children().last().css({"display":"block","font-size":14,"color":"#e93b39"});
+            $($("#fixedcontent a")[s+1]).children().first().css({"display":"block"});
+            $($("#fixedcontent a")[s+1]).children().last().css({"display":"none"});
+
         }
 		
     }else{
         $(".fixedpart").hide("fast");
+        $(".fixon").hide();
     }
 });
 //轮播图效果
@@ -400,6 +403,9 @@ function readPic(){
 	var _height2=0;
 	var _h3=$(".maincontent").height();
 	var _cha=0;
+    var _height=0;
+    var s=0;
+    var _timer=0;
 	ajaxRequest("post","json/mall.json",false,null,function(data){
 		var _data=JSON.parse(data);
 		for(var key in _data){
@@ -422,9 +428,10 @@ function readPic(){
 			}
 			
 		}
-
-			$(document).scroll(function(){
+			$(document).on("scroll",function(){
+			    window.clearTimeout(_timer);
 				_height2=$(document).scrollTop();
+				_height=$(this).scrollTop();
 				_cha=_h3-_height2-2*_height1;
 				if(_cha<0 && _data.hasOwnProperty("reco")){
 					for(var m in _data["reco"]){
@@ -432,13 +439,14 @@ function readPic(){
 						$(".recon .nname").eq(parseInt(m)-1).text(_data["reco"][m]["name"]);
 						$(".recon .pprice").eq(parseInt(m)-1).append(parseInt(_data["reco"][m]["price"]));
 					}
+					_cha=1000;
 					delete _data["reco"];
 				}else{
-					
+                   $(this).off("scroll",arguments.callee);
 				}
-				startMove();
+				startMove(_timer);
 			});
-		
+
 	});
 }
 
@@ -462,8 +470,7 @@ function changeOpacity(){
 		}
 	})
 }
-function startMove(){
-	var _timer=0;
+function startMove(_timer){
 	var _left=$(".recon ul").position().left;
 	function move(){
 		window.clearTimeout(_timer);
