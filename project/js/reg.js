@@ -61,6 +61,7 @@ function addddEvent(){
                             _reg.mobile.lastIndex=0;//正则全局查询lastindex一定要归零
                             if (_reg.mobile.test($(this).val())) {
                                 $.post("api/checkUser.php", {"condition": "mobile='" + $(this).val() + "'"}, function (data, textStatus) {
+                                    console.log(data);
                                     if (textStatus == "success" && parseInt(data) > 0) {
                                         _span.eq(0).text("这个手机号已经被注册，请重新核实你的手机号");
                                         _span.eq(0).css({"color":"red"});

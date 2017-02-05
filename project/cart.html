@@ -113,7 +113,7 @@
 		
 		set:function(name,subname,value,expires,path,domain,secure){
 			var subcookies=this.getAll(name) || {};
-			subcookies[value]=value;
+			subcookies[subname]=value;
 			this.setAll(name,subcookies,expires,path,domain,secure);
 		},
 		setAll:function(name,subcookies,expires,path,domain,secure){
@@ -184,61 +184,104 @@
 		addMessage(EventUtil,subCookieUtil);
 		checkOrder(EventUtil);
 		calCash();
-		totalNumber();
-		var count=totalNumber();
+		totalNumber(subCookieUtil,EventUtil);
+		var count=totalNumber(subCookieUtil,EventUtil);
 		var money=calCash();
-		_cancel.onclick=cancelAll;
+	_cancel.onclick=cancelAll;
+	jude();
 }
 //添加商品信息
 function addMessage(EventUtil,subCookieUtil){
-		var _arr=decodeURIComponent(window.location.search.replace("?","")).split("&");/*从地址栏中获取产品购买信息以及产品详情*/	
-		var _count=parseInt(_arr[0].split("=")[1]);/*产品购买数量*/	
-		var _cookiename=_arr[1].split("=")[1];
-			var _arr1=[];
 			var _str=document.cookie;
-			var _arr2=_str.split(/;/g);
+			var _arr2=_str.split(/;/g);//存储从detail.html页面跳转过来时的Cookie数据
+			var _str2="";
 			var _tobody=document.getElementsByTagName("tbody")[0];
-			var _tr=null;
-			var _td=null;
-			var _name="",
+			var _tr=null,
+			    _td=null,
+			    _name="",
 				_where="",
 				_src="",
 				_used="",
 				_total="",
 				_price="",
-				_num=0;
-			for(var i=0;i<_arr2.length;i++){
-				let _cookiename=_arr2[i].substring(0,_arr2[i].indexOf("=")).replace(" ","");
-				_name=subCookieUtil.get(_cookiename,"name")/*产品名称*/
-				_where=subCookieUtil.get(_cookiename,"where");//产品的发货地
-				_src=subCookieUtil.get(_cookiename,"src");/*获取产品的SRC地址信息*/
-				_used=subCookieUtil.get(_cookiename,"used");//产品的使用情况
-				_total=parseInt(subCookieUtil.get(_cookiename,"count"));/*获取产品的总共数量*/	
-				 _price=parseInt(subCookieUtil.get(_cookiename,"price"));
-				_arr1[i]=[_name,_where,_src,_used,_total,_price];
-				_tr=document.createElement("tr");
-				for(let n=0;n<7;n++){
-					_td=document.createElement("td");
-					_tr.appendChild(_td);
-					
-				}
-					_tobody.appendChild(_tr);
-					$("td:eq("+_num+")").html("<input type=\"checkbox\" checked/ style=\"width=\"10px\" height=\"10px\"\">"+"全选");
-					_num++;
-					$("td:eq("+_num+")").html("<img alt=\"\" src=\"images/"+_arr1[i][2]+".jpg"+"\"/>"+"<span class=\"names\">"+_arr1[i][0]+"</span>");
-					_num++;
-					$("td:eq("+_num+")").html(_arr1[i][1]);
-					_num++;
-					$("td:eq("+_num+")").html(_arr1[i][5]);
-					_num++;
-					$("td:eq("+_num+")").html("<span class=\"reduce\">-</span>"+"<span class=\"count\">"+_count+"</span>"+"<span class=\"add\">+</span>");
-					_num++;
-					$("td:eq("+_num+")").html("<span class=\"total\">"+_arr1[i][5]*_count+"</span>");
-					_num++;
-					$("td:eq("+_num+")").html("删除");
-					_num++;
-				
-			}/*
+				_num=0,
+			    _arr=[],//用于存储地址栏中截取的商品信息数据
+			    _count=0,//用于存储购买商品的数量
+                _arr3=[],//用于存储从首页跳转到购物车时的cookie数据
+                 _arr1=[] //产品信息1
+			if(location.search.indexOf("?")>=0){
+                _arr=decodeURIComponent(window.location.search.replace("?","")).split("&");/*从地址栏中获取产品购买信息以及产品详情*/
+                _count=parseInt(_arr[0].split("=")[1]);/*产品购买数量*/
+                for(var i=0;i<_arr2.length;i++){
+                    let _cookiename=_arr2[i].substring(0,_arr2[i].indexOf("=")).replace(" ","");
+                    _name=subCookieUtil.get(_cookiename,"name")/*产品名称*/
+                    _where=subCookieUtil.get(_cookiename,"where");//产品的发货地
+                    _src=subCookieUtil.get(_cookiename,"src");/*获取产品的SRC地址信息*/
+                    _used=subCookieUtil.get(_cookiename,"used");//产品的使用情况
+                    _total=parseInt(subCookieUtil.get(_cookiename,"count"));/*获取产品的总共数量*/
+                    _price=parseInt(subCookieUtil.get(_cookiename,"price"));
+                    _arr1[i]=[_name,_where,_src,_used,_total,_price];
+                    _tr=document.createElement("tr");
+                    for(let n=0;n<7;n++){
+                        _td=document.createElement("td");
+                        _tr.appendChild(_td);
+
+                    }
+                    _tobody.appendChild(_tr);
+                    $("td:eq("+_num+")").html("<input type=\"checkbox\" checked/ style=\"width=\"10px\" height=\"10px\"\">"+"全选");
+                    _num++;
+                    $("td:eq("+_num+")").html("<img alt=\"\" src=\"images/"+_arr1[i][2]+".jpg"+"\"/>"+"<span class=\"names\">"+_arr1[i][0]+"</span>");
+                    _num++;
+                    $("td:eq("+_num+")").html(_arr1[i][1]);
+                    _num++;
+                    $("td:eq("+_num+")").html(_arr1[i][5]);
+                    _num++;
+                    $("td:eq("+_num+")").html("<span class=\"reduce\">-</span>"+"<span class=\"count\">"+_count+"</span>"+"<span class=\"add\">+</span>");
+                    _num++;
+                    $("td:eq("+_num+")").html("<span class=\"total\">"+_arr1[i][5]*_count+"</span>");
+                    _num++;
+                    $("td:eq("+_num+")").html("删除");
+                    _num++;
+                }
+			}else{
+                _str2=document.cookie;
+                _arr3=_str2.split(/;/g);
+                for(var p=0;i<_arr3.length;p++){
+                    let _cookiename=_arr3[p].substring(0,_arr3[p].indexOf("=")).replace(" ","");
+                    console.log(_cookiename);
+                    _name=subCookieUtil.get(_cookiename,"name")/*产品名称*/
+                    _where=subCookieUtil.get(_cookiename,"where");//产品的发货地
+                    _src=subCookieUtil.get(_cookiename,"src");/*获取产品的SRC地址信息*/
+                    _used=subCookieUtil.get(_cookiename,"used");//产品的使用情况
+                    _total=parseInt(subCookieUtil.get(_cookiename,"count"));/*获取产品的总共数量*/
+                    _price=parseInt(subCookieUtil.get(_cookiename,"price"));
+                    _count=parseInt(subCookieUtil.get(_cookiename,"total"));
+                    _arr1[p]=[_name,_where,_src,_used,_total,_price,_count];
+                    _tr=document.createElement("tr");
+                    for(let n=0;n<7;n++){
+                        _td=document.createElement("td");
+                        _tr.appendChild(_td);
+
+                    }
+                    _tobody.appendChild(_tr);
+                    $("td:eq("+_num+")").html("<input type=\"checkbox\" checked/ style=\"width=\"10px\" height=\"10px\"\">"+"全选");
+                    _num++;
+                    $("td:eq("+_num+")").html("<img alt=\"\" src=\"images/"+_arr1[p][2]+".jpg"+"\"/>"+"<span class=\"names\">"+_arr1[p][0]+"</span>");
+                    _num++;
+                    $("td:eq("+_num+")").html(_arr1[p][1]);
+                    _num++;
+                    $("td:eq("+_num+")").html(_arr1[p][5]);
+                    _num++;
+                    $("td:eq("+_num+")").html("<span class=\"reduce\">-</span>"+"<span class=\"count\">"+_arr1[p][6]+"</span>"+"<span class=\"add\">+</span>");
+                    _num++;
+                    $("td:eq("+_num+")").html("<span class=\"total\">"+_arr1[p][5]*_arr3[p][6]+"</span>");
+                    _num++;
+                    $("td:eq("+_num+")").html("删除");
+                    _num++;
+                }
+
+            }
+			/*
 				EventUtil.addEvent(_span.children[1],"click",function(){
 					document.getElementsByTagName("tbody")[0].removeChild(this.parentNode.parentNode.parentNode);
 				});
@@ -282,9 +325,9 @@ function addMessage(EventUtil,subCookieUtil){
 				
 			});
 			*/
-		addEvent(_arr1);
-		calCash();
-		totalNumber();
+           addEvent(_arr1,subCookieUtil,EventUtil);
+           calCash();
+           totalNumber(subCookieUtil,EventUtil);
 		
 }
 		//提示是否要清空购物车
@@ -315,7 +358,7 @@ function addMessage(EventUtil,subCookieUtil){
 				_target.appendChild(_span);//一定要添加到页面中才能获取
 		}
 		//减少数量的判断
-		function reduce(_target,_arr1){
+		function reduce(_target,_arr1,subCookieUtil,EventUtil){
 				var _total=null;
 				var _count=null;
 				var _tr=$("tbody tr");//翻过的错误获取了所有的整个页面中的所有tr元素
@@ -336,12 +379,12 @@ function addMessage(EventUtil,subCookieUtil){
 					_total.html(_price);
 				}
 				calCash();
-				totalNumber();
+				totalNumber(subCookieUtil,EventUtil);
 				
 			}
 			
 			//增加物品数量
-		function addNum(_target,_arr1){
+		function addNum(_target,_arr1,subCookieUtil,EventUtil){
 				var _total=null;
 				var _count=null;
 				var _tr=$("tbody tr");
@@ -367,7 +410,7 @@ function addMessage(EventUtil,subCookieUtil){
 					
 				}
 				calCash();
-				totalNumber();
+				totalNumber(subCookieUtil,EventUtil);
 				
 			}
 		function changeColor(_target){
@@ -378,7 +421,7 @@ function addMessage(EventUtil,subCookieUtil){
 						}
 					}
 		//事件委托
-		function addEvent(_arr1){
+		function addEvent(_arr1,subCookieUtil,EventUtil){
 			$("tr").delegate("td",{click:function(e){
 				e=e||window.event;
 				var _target=e.target||e,srcElement;
@@ -387,8 +430,8 @@ function addMessage(EventUtil,subCookieUtil){
 				var _input=$(this).children("input")[0];
 				var _delele=this;
 				switch(_target){
-					case _span1:reduce(_target,_arr1);break;
-					case _span2:addNum(_target,_arr1);break;
+					case _span1:reduce(_target,_arr1,subCookieUtil,EventUtil);break;
+					case _span2:addNum(_target,_arr1,subCookieUtil,EventUtil);break;
 					case _input:changeColor(_target);break;
 					case _delele:deleteData(_target);break;
 				}
@@ -408,21 +451,37 @@ function addMessage(EventUtil,subCookieUtil){
 			return _money.toFixed(2);
 		}	
 		/*计算货品总数*/
-		function totalNumber(){
+		function totalNumber(subCookieUtil,EventUtil){
 			var _cal=document.getElementById("cal");
 			var _total=document.getElementById("total");
 			var _tbody=document.getElementsByTagName("tbody")[0];
 			var _len=_tbody.children.length;
 			var _count=0;
-			for(var i=0;i<_len;i++){
-				_count+=parseInt(_tbody.children[i].children[4].children[1].innerHTML);
-			}
-			_total.innerHTML=_count+"件";
-			return _count;
+			var _str=document.cookie;
+			var _arr=_str.split(/;/g);
+            var _cookiename="";
+            var _num=0;
+            if(_tbody.children.length>0){
+                for(var n=0;n<_arr.length;n++){
+                    _cookiename=_arr[n].substring(0,_arr[n].indexOf("=")).replace(" ","");
+                    _num=parseInt(_tbody.children[n].children[4].children[1].innerHTML);
+                    subCookieUtil.set(_cookiename,"total",_num);
+
+                }
+                for(var i=0;i<_len;i++){
+                    _count+=parseInt(_tbody.children[i].children[4].children[1].innerHTML);
+                }
+                _total.innerHTML=_count+"件";
+                return _count;
+            }else{
+                alert("你还没有选购商品请选择");
+               addMessage(EventUtil,subCookieUtil);
+            }
+
 			
 		}
 		/*取消所有的订单*/
-		function cancelAll(count,money){
+		function cancelAll(count,money,subCookieUtil,EventUtil){
 			//var _cancel=document.getElementById("cal").children[0].children[0];
 			var _tr=document.getElementsByTagName("tbody")[0].children;
 			var _len=_tr.length;
@@ -431,7 +490,7 @@ function addMessage(EventUtil,subCookieUtil){
 				if(this.checked){
 					for(var n=0;n<_len;n++){
 						_tr[0].style.backgroundColor="#fdf0ef";
-						_total.innerHTML=totalNumber();
+						_total.innerHTML=totalNumber(subCookieUtil,EventUtil);
 						_strong.innerHTML=calCash();
 					}
 				}else{
@@ -509,18 +568,68 @@ function addMessage(EventUtil,subCookieUtil){
 				_container.style.display="none";
 				_cover.style.display="none";
 			});
-			EventUtil.addEvent(_reger,"click",function(e){
-			   e=e||window.event;
-			   location.href="register.html";
-			});
-			EventUtil.addEvent(_login,"click",function(e){
-			    e=e||window.event;
-			    location.href="login.html";
-			})
 
-			
 		}
-			
+		function jude(){
+		    var _reg={
+                    "mobile":/^1[345678]\d{9}$/g//验证手机号
+			};
+            $("#login").click(function(e){
+                e=e||window.event;
+                var _pra={
+                    "mobile":$(":text").eq(3).val(),
+                    "secret":$(":text").eq(4).val()
+                };
+                if(_pra.mobile!="" && _pra.secret!=""){
+                    $.post("api/login.php",_pra,function(data,textStatus){
+                        console.log(data);
+                        try{
+                            if(data=="0"){
+                                $(this).html("<a href=\"login.html\">login</a>");
+                            }else{
+                                alert("欢迎:"+data+" 光顾!!");
+                                window.location.href="head.html";
+                            }
+                        }catch (e){
+                            alert("忘记密码了吗?");
+                        }
+                    });
+                }else{
+                    alert("您输入的用户名与密码不相符");
+				}
+            });
+            $(":text").eq(0).blur(function(e){
+                e=e||window.event;
+                var _target=e.target||e.srcElement;
+              if(_reg.mobile.test($(_target).val())){
+                  $("#regger").click(function(e){
+                      var _prams={
+                          "mobile":$(":text").eq(0).val(),
+                          "secret":$(":text").eq(1).val(),
+                          "shortmes":$(":text").eq(2).val()
+                      };
+                      if(_prams.mobile!="" && _prams.secret!="" && _prams.shortmes!=""){
+                              $.post("api/registerUser.php", _prams, function (data,textStatus) {
+                                  console.log(data);
+                                  if (textStatus=="success" && parseInt(data) > 0) {
+                                      alert("您已顺利成为会员！！！");
+                                      $("#cover").css({"display":"none"});
+                                      $(".container").css({"display":"none"});
+                                  } else {
+                                      alert("尊敬的用户您好，您注册会员操作失败，请重试，或者联系管理员！！！");
+                                  }
+                              });
+                          }else{
+                              alert("您的信息不完整，请认真核对");
+                          }
+                          $(":text").val("");
+
+                  });
+			  }
+			});
+
+		}
+
 		
 		</script>
 	</head>

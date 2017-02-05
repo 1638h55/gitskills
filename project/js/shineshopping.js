@@ -95,8 +95,9 @@ function getMessage(){
 		$("a").hover(function(){
 			$("a").attr({"color":"#000"});
 		});
-		
+        loadfooter();
 },"json");
+
 }
 
 
@@ -125,4 +126,9 @@ function calDate(endTime,i){
 	}
 	get();	
 	
+}
+function loadfooter(){
+	$.post("footpage.html",function(data){
+		$(".footpage").html(data);
+	})
 }

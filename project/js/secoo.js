@@ -85,6 +85,7 @@ $(document).ready(function(){
     bannerPicture()
     readPic();
     changeOpacity();
+    getCookie();
 });
 //左侧导航栏的鼠标事件
 function addEvent(EventUtil){
@@ -442,16 +443,13 @@ function readPic(){
 					_cha=1000;
 					delete _data["reco"];
 				}else{
-                   $(this).off("scroll",arguments.callee);
+                   $(this).off("scroll",arguments.callee);//不取消的话会一直加载一直抖动
 				}
 				startMove(_timer);
 			});
 
 	});
 }
-
-
-
 function changeOpacity(){
 	$("div").delegate("img",{
 		"mouseenter":function(e){
@@ -510,4 +508,11 @@ function startMove(_timer){
 		}
 		$(".recon ul").css({"left":_left3+"px"});
 	});
+}
+function getCookie(){
+    var _cookie=document.cookie;
+    if(_cookie!=""){
+
+    }
+
 }

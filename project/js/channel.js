@@ -171,7 +171,6 @@ function adddEvent(subCookieUtil){
 						break;
 					}
 				}
-				
 			}
 			if(_div.hasClass("second")){
 				_li=$(".second ul li");

@@ -5,9 +5,7 @@
 	<title>decription about details</title>
 	<link rel="stylesheet" href="css/common.css" type="text/css"/>
 	<link rel="stylesheet" href="css/channeldetail.css" type="text/css"/>
-	<style>
-		
-	</style>
+	<script type="text/javascript" src="js/jquery.js"></script>
 	<script>
 	/*从地址栏获取产品的详细信息，并且切割成数组*/
 		function getCookie(){
@@ -33,7 +31,7 @@
 			
 		}
 		/*进行单件产品购买数量的计算，并且将购买的情况上传到购物车*/
-		function addCount(EventUtil,cookiename){
+		function addCount(EventUtil,cookiename,subCookieUtil){
 			var _span=document.getElementById("count").children[0];
 			var _b=document.getElementById("count").children[1];
 			var _cart=document.getElementById("cart");
@@ -80,7 +78,7 @@
 				e=e||window.event;
 				if(parseInt(_span.children[1].innerHTML)>0){
 					var _count=parseInt(_span.children[1].innerHTML);/*获取该产品的购买数量*/
-					window.location.href="cart.html?count="+_count+"&cookiename="+cookiename;/*跳转的购物车地址栏传当前产品信息*/
+					window.location.href="cart.html?count="+_count;/*跳转的购物车地址栏传当前产品信息*/
 				}else{
 					alert("您还没有选择商品");
 				}
@@ -143,7 +141,7 @@
 				
 				set:function(name,subname,value,expires,path,domain,secure){
 					var subcookies=this.getAll(name) || {};
-					subcookies[value]=value;
+					subcookies[subname]=value;
 					this.setAll(name,subcookies,expires,path,domain,secure);
 				},
 				setAll:function(name,subcookies,expires,path,domain,secure){
@@ -211,9 +209,10 @@
 			
 			};
 			var cookiename=location.search.replace("?","").split("=")[1];
-			console.log(cookiename);
 			getAll(subCookieUtil,cookiename);
-			addCount(EventUtil,cookiename);
+			addCount(EventUtil,cookiename,subCookieUtil);
+            loadheader();
+            loadfooter();
 			
 		}/*组织鼠标拖拽的蓝色选框*/
 		document.onselectstart=function(e){
@@ -250,10 +249,29 @@
 			_brandname.children[0].innerHTML=_name;
 			
 		}
+		function loadheader(){
+		    $.post("commonstyle.html",function(data){
+				$(".headerer").html(data);
+				$(".bottom .bottomfoot").hide();
+				$(".container").css({"padding":"0px"});
+				$(".bottom").mouseenter(function(){
+				    $(".bottom .bottomfoot").show();
+				});
+				$(".bottom").mouseleave(function(){
+				    $(".bottom .bottomfoot").hide();
+				});
+			});
+		}
+		function loadfooter(){
+		    $.post("footpage.html",function(data){
+		        $(".footpage").html(data);
+			});
+		}
 	</script>
 </head>
 <body>
-	<div class="container">
+	<div class="headerer"></div>
+	<div class="container clearfix">
 		<div class="left">
 			<img alt="" src=""/>
 	
@@ -293,7 +311,9 @@
 	
 	</div>
 	<div id="shadow"></div>
-	
+	<div class="footpage">
+
+	</div>
 
 </body>
 </html>

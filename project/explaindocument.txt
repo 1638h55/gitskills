@@ -1,0 +1,14 @@
+﻿说明文档：
+1：此网页为寺库奢侈品购物网站
+2：实现功能   a:主页：head.html
+	     b：登录login.html
+	     c:注册register.html
+	     d:两个分页 1：shineshopping.html
+			2:channel.html 香奈儿图片链接到(Banner 下的左边第一个图标)
+			3：其中channel.html 可以连接到detail.html 动态添加 每个商品的详细信息
+			   包括价格、产品名称、库存数量、使用情况、发货地址
+			   其中的加减按钮可以决定购买数量
+			   点击加入购物车链接到购物车页面cart.html，
+			   此页面也可实现对购买数量的控制且计算出购买总数以及购买
+			      
+			
